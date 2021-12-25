@@ -75,7 +75,9 @@ subject2.send(completion: .finished) // こちらはいらない説？
 
 このあたりの挙動を整理するためにいろいろと実験させてみたというのがこの記事になります。
 
-# 実験その1 - 片方のみを出力なしで完了させたとき
+# 実験
+
+## 実験その1 - 片方のみを出力なしで完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -102,7 +104,7 @@ subject1.send(completion: .finished) // finished
 - 片方だけが完了すれば `zipped` も完了する
 
 
-# 実験その2 - 片方のみ出力&完了させたとき
+## 実験その2 - 片方のみ出力&完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -132,7 +134,7 @@ subject1.send(completion: .finished)
 - 値が揃わないので `zipped` は出力されない ← 当たり前の挙動
 - 値が揃っていないので完了されない
 
-# 実験その3 - 両方で出力後、片方を完了させたとき
+## 実験その3 - 両方で出力後、片方を完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
