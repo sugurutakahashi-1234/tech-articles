@@ -16,7 +16,7 @@ published: true
 
 - 片方が完了をした段階で、値が揃っていれば完了する
 - 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
-- 値が揃っていない状態でも、両方が完了すれば完了する
+- 値が揃っていない状態でも、値を待たせている側が完了すると、完了する
 
 # zip の基本的な挙動
 
@@ -134,7 +134,36 @@ subject1.send(completion: .finished)
 - 値が揃わないので `zipped` は出力されない ← 当たり前の挙動
 - 値が揃っていないので完了されない
 
-## 実験その3 - 両方で出力後、片方を完了させたとき
+## 実験その3 - 片方のみ出力させ、もう片方で完了させたとき
+
+```swift
+import Combine
+
+var cancellables: Set<AnyCancellable> = []
+let subject1 = PassthroughSubject<Void, Error>()
+let subject2 = PassthroughSubject<Void, Error>()
+let zipped = subject1.zip(subject2)
+
+zipped
+    .sink { result in
+        switch result {
+        case .finished:
+            print("finished")
+        case .failure(let error):
+            print("failure error: \(error)")
+        }
+    } receiveValue: { _ in
+        print("receiveValue")
+    }
+    .store(in: &cancellables)
+
+subject1.send(())
+subject2.send(completion: .finished) // finished
+```
+
+- 値の揃い待ちの状態で、値を待たせている側が完了すると、`ziped` も完了する
+
+## 実験その4 - 両方で出力後、片方を完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -163,7 +192,7 @@ subject1.send(completion: .finished) // finished
 
 - 片方が完了をした段階で、値が揃っていれば完了する
 
-## 実験その4 - 片方のみ出力&完了させ、もう片方を出力させたとき
+## 実験その5 - 片方のみ出力&完了させ、もう片方を出力させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -192,7 +221,7 @@ subject2.send(()) // receiveValue, finished
 - 値が揃った瞬間に `zipped` が出力する&完了する
 - 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
 
-## 実験その5 - 片方のみ出力させ、両方を完了させたとき
+## 実験その6 - 片方のみ出力させ、両方を完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -218,6 +247,7 @@ subject1.send(completion: .finished)
 subject2.send(completion: .finished) // finished
 ```
 - 値が揃っていない状態でも、両方が完了すれば完了する
+- これは「値の揃い待ちの状態で、値を待たせている側が完了すると、`ziped` も完了する」が発動していると思われる
 
 # 実験からわかったこと
 
@@ -225,7 +255,7 @@ subject2.send(completion: .finished) // finished
 
 - 片方が完了をした段階で、値が揃っていれば完了する
 - 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
-- 値が揃っていない状態でも、両方が完了すれば完了する
+- 値の揃い待ちの状態で、値を待たせている側が完了すると、`ziped` も完了する
 
 ## 練習問題
 
@@ -288,14 +318,9 @@ subject2.send(completion: .finished) // ← すでに zipped が finished して
 
 `Never` を用いた場合も `zip` の完了条件は変わりません。
 
-`subject2` を `Void` -> `Never` に変更して実験してみます。
-
 ```swift
-import Combine
-
-var cancellables: Set<AnyCancellable> = []
-let subject1 = PassthroughSubject<Void, Error>()
-let subject2 = PassthroughSubject<Never, Error>()
+let subject1 = PassthroughSubject<Never, Error>() // Never にする
+let subject2 = PassthroughSubject<Never, Error>() // Never にする
 let zipped = subject1.zip(subject2)
 
 zipped
@@ -311,10 +336,9 @@ zipped
     }
     .store(in: &cancellables)
 
-subject1.send(()) // 片方が Never のため値は揃うことなく、なにも出力されない
-subject2.send(completion: .finished) // finished
+subject1.send(completion: .finished) // finished
 ```
 
 - 片方が `Never` のため値は揃うことない = `値が揃い切っている状態` のため、どちらか片方が完了した段階で、`ziped` は完了する
 
-この `Never` の性質を利用して、値の出力の組み合わせの数を考慮せずに、`subject1` と `subject2` のどちらか一方が完了したときに、`ziped` を完了させるという技があります。
+この `Never` の性質を利用して、`subject1` と `subject2` のどちらか一方が完了したときに、`ziped` を完了させるという技があります。
