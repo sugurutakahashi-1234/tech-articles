@@ -76,7 +76,7 @@ subject2.send(completion: .finished) // こちらはいらない説？
 
 # 実験
 
-## 実験その1 - 片方のみを出力なしで完了させたとき
+## 実験その1 - 出力なしで完了させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -97,6 +97,8 @@ zipped
     .store(in: &cancellables)
 
 subject1.send(completion: .finished) // finished
+
+// subject2.send(completion: .finished) ← 必要ない
 ```
 
 - 片方だけが完了すれば `zipped` も完了する
@@ -212,8 +214,9 @@ zipped
     }
     .store(in: &cancellables)
 
-subject1.send(())
+subject1.send(()) // ← ペア不足
 subject1.send(completion: .finished)
+
 subject2.send(completion: .finished) // finished
 ```
 - 値が揃っていない状態でも、両方が完了すれば完了する
