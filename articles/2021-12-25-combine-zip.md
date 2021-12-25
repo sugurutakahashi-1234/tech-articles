@@ -14,10 +14,9 @@ published: true
 
 先に結論を述べますと `zip` の完了条件は以下の通りです。
 
-- 両方が完了する必要はない
 - 片方が完了をした段階で、値が揃っていれば完了する
-- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃った段階で完了する
-
+- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
+- 値が揃っていない状態でも、両方が完了すれば完了する
 
 # zip の基本的な挙動
 
@@ -100,9 +99,8 @@ zipped
 subject1.send(completion: .finished) // finished
 ```
 
-- 出力がなくても完了する
 - 片方だけが完了すれば `zipped` も完了する
-
+- 出力がなくても完了する = 揃っていない組み合わせがないので完了する 
 
 ## 実験その2 - 片方のみ出力&完了させたとき
 
@@ -157,11 +155,13 @@ zipped
 subject1.send(())
 subject2.send(()) // receiveValue
 subject1.send(completion: .finished) // finished
+
+// subject2.send(completion: .finished) ← 必要ない
 ```
 
-- `subject2` は完了させる必要はない
+- 片方が完了をした段階で、値が揃っていれば完了する
 
-## 実験その4 - 片方のみ出力&完了させ、もう片方を出力したとき
+## 実験その4 - 片方のみ出力&完了させ、もう片方を出力させたとき
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -190,13 +190,39 @@ subject2.send(())
 ```
 
 - 値が揃った瞬間に `zipped` が出力する&完了する
-- `subject2` は完了させる必要はない
+- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
+
+## 実験その5 - 片方のみ出力させ、両方を完了させたとき
+
+```swift
+let subject1 = PassthroughSubject<Void, Error>()
+let subject2 = PassthroughSubject<Void, Error>()
+let zipped = subject1.zip(subject2)
+
+zipped
+    .sink { result in
+        switch result {
+        case .finished:
+            print("finished")
+        case .failure(let error):
+            print("failure error: \(error)")
+        }
+    } receiveValue: { _ in
+        print("receiveValue")
+    }
+    .store(in: &cancellables)
+
+subject1.send(())
+subject1.send(completion: .finished)
+subject2.send(completion: .finished) // finished
+```
+- 値が揃っていない状態でも、両方が完了すれば完了する
 
 # 実験からわかったこと
 
-- 両方が完了する必要はない
 - 片方が完了をした段階で、値が揃っていれば完了する
-- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃った段階で完了する
+- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃い切った段階で完了する
+- 値が揃っていない状態でも、両方が完了すれば完了する
 
 # 応用編
 
@@ -230,7 +256,6 @@ subject2.send(()) // E
 subject2.send(()) // F
 subject2.send(()) // G
 subject2.send(completion: .finished) // H
-
 ```
 
 ## 答え
