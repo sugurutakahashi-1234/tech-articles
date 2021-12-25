@@ -58,7 +58,7 @@ subject2.send(()) // receiveValue
 
 ## 基本動作 - 完了させるとき
 
-そしてこのときに `zipped` のストリームを完了させようと思うと、以下の 2 行を追加するのが直感的です。
+そしてこのときに `zipped` を完了させたい場合、以下の 2 行を実行するのが直感的です。
 
 ```swift
 subject1.send(completion: .finished)
