@@ -200,7 +200,7 @@ subject2.send(())
 
 ## 問題
 
-以下の場合、A から F のどこで `"receiveValue"` と `"finished"` するでしょうか？
+以下の場合、A から H のどこで `"receiveValue"` と `"finished"` するでしょうか？
 
 ```swift
 let subject1 = PassthroughSubject<Void, Error>()
@@ -221,32 +221,39 @@ zipped
     .store(in: &cancellables)
 
 subject1.send(()) // A
-subject1.send(completion: .finished) // B
-subject1.send(()) // C
-subject2.send(()) // D
+subject1.send(()) // B
+subject1.send(completion: .finished) // C
+subject1.send(()) // D
 subject2.send(()) // E
-subject2.send(completion: .finished) // F
+subject2.send(()) // F
+subject2.send(()) // G
+subject2.send(completion: .finished) // H
+
 ```
 
 ## 答え
 
-E で `"receiveValue"` と `"finished"` の両方されるでした。
+```swift
+subject1.send(())
+subject1.send(())
+subject1.send(completion: .finished)
+subject1.send(())
+subject2.send(()) // receiveValue
+subject2.send(()) // receiveValue, finished
+subject2.send(())
+subject2.send(completion: .finished)
+```
 解説は以下の通りです。
 
 ```swift
 subject1.send(())
-subject1.send(completion: .finished)
-subject1.send(()) // ← すでにsubject1がfinishedしているので意味ない
-subject2.send(()) // ここで receiveValueとfinishedする
-subject2.send(()) // ← すでにzippedがfinishedしているので意味ない
-subject2.send(completion: .finished) // ← すでにzippedがfinishedしているので意味ない
+subject1.send(())
+subject1.send(completion: .finished) // subject1 は完了しているが、2つの値が揃っていない状態
+subject1.send(()) // ← すでに subject1 が finished しているので意味ない
+subject2.send(()) // 値の1つめが揃うので receiveValue
+subject2.send(()) // 値の2つめが揃ったので receiveValue、そしてすべて揃い切ったので finished となる
+subject2.send(()) // ← すでに zipped が finished しているので意味ない
+subject2.send(completion: .finished) // ← すでに zipped が finished しているので意味ない
 ```
 
-# まとめ
-
-繰り返しになりますが、`zip` の完了条件は以下の通りになります。
-
-- 両方が完了する必要はない
-- 片方が完了をした段階で、値が揃っていれば完了する
-- 値が揃っていない状態で、片方が完了した場合、値が揃うまで待ち、揃った段階で完了する
-
+以上になります。
