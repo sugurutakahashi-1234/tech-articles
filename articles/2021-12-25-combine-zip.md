@@ -186,9 +186,7 @@ zipped
 subject1.send(())
 subject1.send(completion: .finished)
 
-subject2.send(())
-// receiveValue
-// finished
+subject2.send(()) // receiveValue, finished
 ```
 
 - 値が揃った瞬間に `zipped` が出力する&完了する
