@@ -313,10 +313,10 @@ zipped
     }
     .store(in: &cancellables)
 
-subject1.send(()) // 片方がNeverのため値は揃うことなく、なにも出力されない
+subject1.send(()) // 片方が Never のため値は揃うことなく、なにも出力されない
 subject2.send(completion: .finished) // finished
 ```
 
-- 片方が `Never` のため値は揃うことない = 値が揃い切っている状態 のため、どちらか片方が完了した段階で、`ziped` は完了する
+- 片方が `Never` のため値は揃うことない = `値が揃い切っている状態` のため、どちらか片方が完了した段階で、`ziped` は完了する
 
 この `Never` の性質を利用して、値の出力の組み合わせの数を考慮せずに、`subject1` と `subject2` のどちらか一方が完了したときに、`ziped` を完了させるという技があります。
