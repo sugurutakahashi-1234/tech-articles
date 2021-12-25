@@ -286,4 +286,37 @@ subject2.send(()) // ← すでに zipped が finished しているので意味�
 subject2.send(completion: .finished) // ← すでに zipped が finished しているので意味ない
 ```
 
-以上になります。
+# （特別編） Never を zipした場合
+
+`Never` を用いた場合も `zip` の完了条件は変わりません。
+
+`subject2` を `Void` -> `Never` に変更して実験してみます。
+
+```swift
+import Combine
+
+var cancellables: Set<AnyCancellable> = []
+let subject1 = PassthroughSubject<Void, Error>()
+let subject2 = PassthroughSubject<Never, Error>()
+let zipped = subject1.zip(subject2)
+
+zipped
+    .sink { result in
+        switch result {
+        case .finished:
+            print("finished")
+        case .failure(let error):
+            print("failure error: \(error)")
+        }
+    } receiveValue: { _ in
+        print("receiveValue")
+    }
+    .store(in: &cancellables)
+
+subject1.send(()) // 片方がNeverのため値は揃うことなく、なにも出力されない
+subject2.send(completion: .finished) // finished
+```
+
+- 片方が `Never` のため値は揃うことない = 値が揃い切っている状態 のため、どちらか片方が完了した段階で、`ziped` は完了する
+
+この `Never` の性質を利用して、値の出力の組み合わせの数を考慮せずに、`subject1` と `subject2` のどちらか一方が完了したときに、`ziped` を完了させるという技があります。
