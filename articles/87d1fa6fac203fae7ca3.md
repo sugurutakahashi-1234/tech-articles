@@ -1,0 +1,181 @@
+---
+title: "Django で Hello World（初心者）"
+emoji: "🔖"
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["Python","Django","Python3"]
+published: true
+---
+# はじめに
+Python をちょっとだけ触ってみたく、最も人気である Django というフレームワークを用いてブラウザに `Hello World` と表示させるまでやってみたので、その備忘録を投稿いたします。
+
+今回こちらの記事を参考にさせていただきました。
+
+Djangoで初めてのHello World
+https://qiita.com/Yuji_6523/items/d601ad11ad49b9e7ab0e
+
+前提として python と pip はインストール済みとします。
+
+# django コマンドのインストール
+
+`pip install django` と実行して、 django コマンドをインストールします。
+
+```
+$ python --version
+Python 3.8.2
+
+$ pip install django
+# (省略)
+
+$ python -m django --version
+3.1
+```
+
+# Django プロジェクトの作成
+
+今回は `helloWorldProject` という名前のプロジェクトを作成してみた例になります。
+
+`django-admin startproject [プロジェクト名] [作成するディレクトリ先]` とコマンドを実行することでプロジェクトが作成できます。
+
+```
+$ django-admin startproject helloWorldProject .
+$ tree 
+.
+├── helloWorldProject
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+```
+
+# アプリケーションの追加
+
+このままだと何もない状態なので、`ドメイン/hello` とブラウザでアクセスしたときに起動するようなアプリケーションを追加してみます。
+
+今回は `hello` という名前のアプリケーションを追加します。
+`python manage.py startapp [アプリケーション名]` というコマンドを実行することでアプリケーションを追加できます。
+
+```
+$ python manage.py startapp hello
+$ tree
+.
+├── hello
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── helloWorldProject
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-38.pyc
+│   │   └── settings.cpython-38.pyc
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+```
+
+## settings.py への追記
+
+このままだと、`hello` アプリケーションは適用されていないので設定を追記します。
+
+`helloWorldProject/settings.py` に `hello` というアプリケーションがあることを追記します。
+
+```python:helloWorldProject/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # 追加
+    'hello',
+]
+```
+
+## ルーティング設定
+
+`helloWorldProject/urls.py` でルーティング設定を行います。
+
+```python:helloWorldProject/urls.py
+from django.contrib import admin
+from django.urls import path, include # include 追加
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # 追加
+    path('', include('hello.urls')),
+]
+```
+
+ここに `path('hello',` と書くのもありですが、今回は、`hello/urls.py` というファイルを作成して、`ドメイン/hello` とリクエストされた場合のルーティングについては `hello/urls.py` に丸投げします。
+
+そうした理由はなるべく高凝集で低結合なプログラムを目指すためです。
+
+さらに `hello/urls.py` を新規に作成して、`ドメイン/hello` とアクセスされた場合 `hello/views.py` の index()関数を呼び出すように設定します。 
+
+```python:hello/urls.py(新規追加ファイル)
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('hello', views.index),
+]
+```
+
+## view の設定
+
+`hello/urls.py` で設定したように `hello/views.py` に `index()関数` を作成します。
+
+今回は HTTPレスポンスで `Hello World` と記述された `Content-Type: text/html` のファイルを返却するようにします。
+
+```python:hello/views.py
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('Hello World')
+```
+
+# マイグレーション 
+
+今回はあまり関係ないのですが、ここでいうマイグレーションとはアプリケーションで使うデータベースの定義を自動的に作成・管理する機能のことを指します。
+
+以下のコマンドで実行できます。
+
+```
+$ python manage.py migrate
+```
+
+マイグレーションに成功すればコマンド実行後にエラーが出ないはずです。
+
+# ローカルホストでの起動
+
+以下のコマンドでローカルホストに起動することができます。
+
+```
+$ python manage.py runserver
+```
+
+デフォルトではポート8000番で起動するので、 `http://localhost:8000/hello` にアクセスして、`python:hello/views.py` で記述した `Hello World` が表示されてば成功です。
+<img width="314" alt="スクリーンショット 2020-08-10 23.08.30.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/259125/3b8bc038-0218-ac0e-ba2e-1d42cea422a1.png">
+以上になります。
+
+# まとめ
+- Django というフレームワークを用いてプロジェクトを作成できるようになった
+- Django でアプリケーションを追加できるようになった
+- Django でローカルホストでアプリケーションを起動して、動作が確認できるようなった
+
+# さいごに
+今回作成したプロジェクトは[GitHub](https://github.com/suguruTakahashi-1234/django-sample)で公開しました。
+
+このプロジェクトを使用して Dockerfile 記述した記事も投稿しました。
+・[Django の開発環境の Dockerfile を作成してみた](https://qiita.com/sugurutakahashi12345/items/6d68e6bb9163961a8d4d)

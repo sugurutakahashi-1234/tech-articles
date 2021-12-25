@@ -1,0 +1,30 @@
+---
+title: "git rebase のやり方"
+emoji: "🔖"
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["Git"]
+published: true
+---
+# 前提
+sourcetree を使っています。
+
+
+# 登場ブランチ
+
+・根元にしたいブランチ（今回はリモートの hogeDevelop ブランチと想定）
+・作業中のブランチ（今回はローカルの feature/hogehoge ブランチと想定）
+
+※ hogeDevelop と feature/hogehoge は適宜置き換えてください。
+
+# 手順
+ 
+1. 作業ブランチに checkout する （`git checkout feature/hogehoge`）
+2. `git rebase origin/hogeDevelop` コマンドの実行し rebase を行う。このときにコンフリクトがなければそのままリベースされて終了なので以降の手順はしなくても大丈夫です。コンフリクトしている場合はその旨がコンソールに表示されるので、以降の手順を実施する。
+3. sourcetree 上でコンフリクトしているファイルが三角の注意マークで表示されるので、ファイルを選択して右クリックから「Finderを表示」から、VSCode など適当なエディターで開いてコンフリクトを解消する。この際、どのように修正して良いかわからなけれなば関係者と相談する。
+4. 修正が終了したら `git add --all` コマンドを実行する。
+5. エラーがなければ `git rebase --continue` コマンドを実行する。成功すると、rebase コマンドでエラーで詰まっていたコミットが反映される。
+6. rebase 後の作業ブランチを普通に push するとエラーになるので `git push --force-with-lease origin HEAD` コマンドで強制的に push する。
+
+
+備考1：sourcetree での操作はコンフリクトとしているファイルを探す作業のため、他の方法でも構いません。
+備考2：コンフリクトの解消作業で `git rebase --abort` コマンドを実行すると rebase コマンドを実行する前に戻すことができます。
