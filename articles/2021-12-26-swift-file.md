@@ -74,12 +74,13 @@ let fileUrl2: URL = dir.appendingPathComponent("test_2.txt")
 print("fileUrl2: \(fileUrl2)") // fileUrl2: file:///Users/xxxxxxx/Documents/test_2.txt
 
 do {
-    // ファイルが存在するとコピーに失敗する
-    try FileManager.default.copyItem(at: fileUrl1, to: fileUrl2) // エラーがcatchされる
+    try FileManager.default.copyItem(at: fileUrl1, to: fileUrl2) 
 } catch {
-    print("Error: \(error)") // Error: Error Domain=NSCocoaErrorDomain Code=516 "“test_1.txt” couldn’t be copied to “Documents” because an item with the same name already exists."
+    print("Error: \(error)")
 }
 ```
+
+これで、`fileUrl1` の内容が `fileUrl2` に内容がコピーされて、`fileUrl2` にファイルが新たに作成されます。
 
 ## 既にファイルが存在するとコピーに失敗する
 
@@ -111,6 +112,8 @@ do {
     print("Error: \(error)")
 }
 ```
+
+これで安全にコピーできます。
 
 # 結論
 
