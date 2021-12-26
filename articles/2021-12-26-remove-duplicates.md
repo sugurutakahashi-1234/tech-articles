@@ -45,7 +45,7 @@ let cancellableA = nums.publisher
         print("\($0)") // 0 1 2
     }
 
-// removeDuplicates より後に compactMap する
+// removeDuplicates の後に compactMap する
 let cancellableB = nums.publisher
     .removeDuplicates() // [0, nil, 0, nil, 1, 2]
     .compactMap { $0 } // [0, 0, 1, 2] 
