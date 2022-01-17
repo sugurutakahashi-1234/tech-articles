@@ -1,5 +1,5 @@
 ---
-title: "【Swift】値付き enum は CaseIterable をつけても allCases でアクセスできない件 "
+title: "【Swift】値付き enum は CaseIterable をつけても allCases を自身で定義しなければならない件"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift","CaseIterable"]
