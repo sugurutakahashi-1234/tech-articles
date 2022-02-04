@@ -13,17 +13,16 @@ published: true
 ```swift
 extension Array where Element: Equatable {
     func diffIndices(from oldArray: [Element]) -> [Int] {
-        var diffIndices: [Int] = []
-        self.indices.indices.forEach {
-            if oldArray.indices.contains($0) {
-                if self[$0] != oldArray[$0] {
-                    diffIndices.append($0)
+        self.indices.indices.compactMap { index in
+            if oldArray.indices.contains(index) {
+                if self[index] != oldArray[index] {
+                    return index
                 }
             } else {
-                diffIndices.append($0)
+                return index
             }
+            return nil
         }
-        return diffIndices
     }
 }
 ```
@@ -59,13 +58,12 @@ stringsB.diffIndices(from: stringsA).forEach {
 ```swift
 extension Array where Element: Equatable {
     func diffIndicesNotConsideringOrder(from oldArray: [Element]) -> [Int] {
-        var diffIndices: [Int] = []
-        self.indices.indices.forEach {
-            if !oldArray.contains(self[$0]) {
-                diffIndices.append($0)
+        self.indices.indices.compactMap { index in
+            if !oldArray.contains(self[index]) {
+                return index
             }
+            return nil
         }
-        return diffIndices
     }
 }
 ```
