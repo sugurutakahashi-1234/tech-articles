@@ -12,7 +12,7 @@ Combine には [`.prefix(untilOutputFrom: )`](https://developer.apple.com/docume
 
 ## サンプルコード
 
-挙動は以下のサンプルコードを見ていただくのが一番早いと思います。
+挙動は以下のサンプルコードを見ていただくのが早いと思います。
 
 ```swift
 var cancellables = Set<AnyCancellable>()

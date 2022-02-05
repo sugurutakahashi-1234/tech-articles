@@ -12,7 +12,7 @@ Combine には [`measureInterval(using: )`](https://developer.apple.com/document
 
 ## サンプルコード
 
-挙動はサンプルコードを見ていただくのが一番早いと思います。
+挙動はサンプルコードを見ていただくのが早いと思います。
 
 まずは以下のような一定間隔で出力してくれる Publisher を用意します。
 
