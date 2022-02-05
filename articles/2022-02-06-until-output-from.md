@@ -8,7 +8,7 @@ published: true
 
 # `.prefix(untilOutputFrom: )`
 
- Combine には [`.prefix(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) という他の Publisher の出力を条件に、そのストリームの出力を止めて完了させるという、かなりマニアックな関数が用意されていたので紹介したいと思います。
+Combine には [`.prefix(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) という他の Publisher の出力を条件に、そのストリームの出力を止めて完了させるという、かなりマニアックな関数が用意されていたので紹介したいと思います。
 
 ## サンプルコード
 
