@@ -205,9 +205,11 @@ var cancellable = publisherA // Instance method 'combineLatest' requires the typ
     } receiveValue: { print("output: \($0)") }
 ```
 
-### 修正案1: 全部 Failure の型を Error にする
+このようなときの修正案をいくつか挙げたいと思います。
 
-Failure が Never の publisherA、publisherC に `setFailureType(to: Error.self)` して型を揃えることができます。
+### 修正案1: Failure の型を Error に統一する
+
+Failure が Never の publisherA、publisherC に `setFailureType(to: Error.self)` して、Error 型に揃えることができます。
 
 ```swift
 var cancellable = publisherA.setFailureType(to: Error.self).eraseToAnyPublisher()
@@ -229,7 +231,7 @@ var cancellable = publisherA.setFailureType(to: Error.self).eraseToAnyPublisher(
 
 とても見づらいですね。。。
 
-### 修正案2: 全部 Failure の型を Never にする
+### 修正案2: Failure の型を Never に統一する
 
 `replaceError(with:)` で Failure を Never に変換することができます。
 
@@ -251,9 +253,7 @@ var cancellable = publisherA
     } receiveValue: { print("output: \($0)") }
 ```
 
-一見スマートですが、`publisherB.replaceError(with: "")` は何をしたいのかよくわかりませんよね？
-
-空文字に変換することが `b != ""` の結果を `false` にするという暗黙的実装が含まれてしまいます。
+一見、いい感じですが、publisherB のエラー発生時に空文字に変換することが `b != ""` の結果を `false` にするという暗黙的実装が含まれてしまいます。
 
 ### 修正案3: Failure の型を Never にした Publisher を用意する
 
@@ -303,7 +303,9 @@ publisherB
     .store(in: &cancellables)
 ```
 
-よくやってしまうのが、条件判定用の subscribe 側で publisherB のエラーハンドリングを行おうとして、そのために `zip()` でつないだり、Never を Output する AnyPublisher を用意したりして、Combine 処理を複雑にすることにつながるので、おすすめしません。
+条件判定用の subscribe 側で publisherB のエラーハンドリングを行おうことはおすすめしません。
+
+それを行おうとするとエラー検知用の AnyPublisher を用意して、それを　`zip()` でつなぐようなことをしなければならなくなり、Combine 処理を複雑にすることにつながります。
 
 Publisher もそうですが、その subscribe も目的の用途に合わせて、それぞれ分割して用意してあげると見通しが良くなります。
 
