@@ -181,7 +181,7 @@ Publisher の分割単位はケースバイケースですね。
 
 # (8) Publisher を分割せずに書くことによる弊害
 
-例えば publisherB に Error が発生する可能性がある場合は、`combineLatest()` の制約上、Failure の型を合わせないといけないためコンパイルエラーとなってしまいます。
+例えば publisherB に Error が発生する可能性がある場合は、`combineLatest()` の制約上、Failure の型を合わせないといけないため、コンパイルエラーとなってしまいます。
 
 
 ```swift
