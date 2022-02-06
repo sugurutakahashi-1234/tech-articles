@@ -12,7 +12,7 @@ published: true
 - 条件判定の Publisher は Output を `Bool` にしておくと扱いやすい
 - `combineLatest()` のあとのタプルの見通しが悪いので、早めに `map()` して出力を1つにしたほうがよい
 - `filter()` 後に `first()` することで、条件が揃った後すぐに completion ブロックに飛ばすことができる
-- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい
+- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい = Publisher の subscribe も適当な単位で分割した方が見通しがよい
 
 # やりたいこと
 
@@ -145,7 +145,7 @@ var cancellable = allCheckPublisher
     } receiveValue: { print("output: \($0)") }
 ```
 
-## (7) リファクタ案
+## (7) Publisher を分割せずに書いた場合
 
 個人的な意見として、`combineLatest()` など、Publisher を組み合わせる場合は Publisher をなるべく分割した方が読みやすいと思っています。
 
@@ -176,3 +176,143 @@ var cancellable = publisherA
 ```
 
 Publisher の分割単位はケースバイケースですね。
+
+# (8) Publisher を分割せずに書くことによる弊害
+
+例えば publisherB に Error が発生する可能性がある場合は、`combineLatest()` の制約上、Failure の型を合わせないといけないためコンパイルエラーとなってしまいます。
+
+
+```swift
+let publisherA: PassthroughSubject<Int, Never> = .init()
+let publisherB: PassthroughSubject<String, Error> = .init() // Errorの発生の可能性
+let publisherC: PassthroughSubject<Bool, Never> = .init()
+
+// 以下は  コンパイルエラーとなってしまう。
+var cancellable = publisherA // Instance method 'combineLatest' requires the types 'Never' and 'Error' be equivalent
+    .combineLatest(publisherB, publisherC)
+    .map { a, b, c in
+        a != 0 && b != "" && c
+    }
+    .filter { $0 }
+    .first()
+    .sink { completion in
+        switch completion {
+        case .finished:
+            print("completion: \(completion)")
+        case let .failure(error):
+            print("error: \(error)")
+        }
+    } receiveValue: { print("output: \($0)") }
+```
+
+### 修正案1: 全部 Failure の型を Error にする
+
+Failure が Never の publisherA、publisherC に `setFailureType(to: Error.self)` して型を揃えることができます。
+
+```swift
+var cancellable = publisherA.setFailureType(to: Error.self).eraseToAnyPublisher()
+    .combineLatest(publisherB, publisherC.setFailureType(to: Error.self).eraseToAnyPublisher())
+    .map { a, b, c in
+        a != 0 && b != "" && c
+    }
+    .filter { $0 }
+    .first()
+    .sink { completion in
+        switch completion {
+        case .finished:
+            print("completion: \(completion)")
+        case let .failure(error):
+            print("error: \(error)")
+        }
+    } receiveValue: { print("output: \($0)") }
+```
+
+とても見づらいですね。。。
+
+### 修正案2: 全部 Failure の型を Never にする
+
+`replaceError(with:)` で Failure を Never に変換することができます。
+
+```swift
+var cancellable = publisherA
+    .combineLatest(publisherB.replaceError(with: ""), publisherC) // replaceError で Never にする
+    .map { a, b, c in
+        a != 0 && b != "" && c
+    }
+    .filter { $0 }
+    .first()
+    .sink { completion in
+        switch completion {
+        case .finished:
+            print("completion: \(completion)")
+        case let .failure(error):
+            print("error: \(error)")
+        }
+    } receiveValue: { print("output: \($0)") }
+```
+
+一見スマートですが、`publisherB.replaceError(with: "")` は何をしたいのかよくわかりませんよね？
+
+空文字に変換することが `b != ""` の結果を `false` にするという暗黙的実装が含まれてしまいます。
+
+### 修正案3: Failure の型を Never にした Publisher を用意する
+
+つまり、Publisher の分割案です。
+
+```swift
+let checkPublisherA: AnyPublisher<Bool, Never> = publisherA
+    .map { $0 != 0 }
+    .eraseToAnyPublisher()
+
+let checkPublisherB: AnyPublisher<Bool, Never> = publisherB
+    .map { $0 != "" }
+    .replaceError(with: false) // replaceErrorでNeverにする
+    .eraseToAnyPublisher()
+
+let checkPublisherC: AnyPublisher<Bool, Never> = publisherC
+    .map { $0 }
+    .eraseToAnyPublisher()
+
+var cancellable = checkPublisherA
+    .combineLatest(checkPublisherB, checkPublisherC)
+    .map { $0 && $1 && $2}
+    .filter { $0 }
+    .first()
+    .sink { completion in
+        switch completion {
+        case .finished:
+            print("completion: \(completion)")
+        case let .failure(error):
+            print("error: \(error)")
+        }
+    } receiveValue: { print("output: \($0)") }
+```
+
+これであれば、条件判定の checkPublisherB について、publisherB が Error となったときに、`false` を出力するということがわかりやすいですね。
+
+また、必要に応じて、publisherB を単独で subscribe することによって、エラーハンドリングすることも可能です。
+
+```swift
+// publisherBのエラーハンドリング用のsubscribe
+publisherB
+    .sink { completion in
+        if case let .failure(error) = completion {
+            print("publisherB error: \(error)")
+        }
+    } receiveValue: { _ in }
+    .store(in: &cancellables)
+```
+
+よくやってしまうのが、条件判定用の subscribe 側で publisherB のエラーハンドリングを行おうとして、そのために `zip()` でつないだり、Never を Output する AnyPublisher を用意したりして、Combine 処理を複雑にすることにつながるので、おすすめしません。
+
+Publisher もそうですが、その subscribe も目的の用途に合わせて、それぞれ分割して用意してあげると見通しが良くなります。
+
+# 結論
+
+- Publisher は適当な単位で分割した方が見通しがよい（長くなりすぎても分割しすぎても読みにくい）
+- 条件判定の Publisher は Output を `Bool` にしておくと扱いやすい
+- `combineLatest()` のあとのタプルの見通しが悪いので、早めに `map()` して出力を1つにしたほうがよい
+- `filter()` 後に `first()` することで、条件が揃った後すぐに completion ブロックに飛ばすことができる
+- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい = Publisher の subscribe も適当な単位で分割した方が見通しがよい
+
+以上になります。
