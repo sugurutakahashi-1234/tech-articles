@@ -145,6 +145,8 @@ var cancellable = allCheckPublisher
     } receiveValue: { print("output: \($0)") }
 ```
 
+分割しすぎてちょっと読みづらいですね。
+
 ## (7) Publisher を分割せずに書いた場合
 
 個人的な意見として、`combineLatest()` など、Publisher を組み合わせる場合は Publisher をなるべく分割した方が読みやすいと思っています。
