@@ -12,7 +12,7 @@ published: true
 - 条件判定の Publisher は Output を `Bool` にしておくと扱いやすい
 - `combineLatest()` のあとのタプルの見通しが悪いので、早めに `map()` して出力を1つにしたほうがよい
 - `filter()` 後に `first()` することで、条件が揃った後すぐに completion ブロックに飛ばすことができる
-- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい = Publisher の subscribe も適当な単位で分割した方が見通しがよい
+- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい ＝ Publisher の subscribe も適当な単位で分割した方が見通しがよい
 
 # やりたいこと
 
@@ -317,6 +317,6 @@ Publisher もそうですが、その subscribe も目的の用途に合わせ�
 - 条件判定の Publisher は Output を `Bool` にしておくと扱いやすい
 - `combineLatest()` のあとのタプルの見通しが悪いので、早めに `map()` して出力を1つにしたほうがよい
 - `filter()` 後に `first()` することで、条件が揃った後すぐに completion ブロックに飛ばすことができる
-- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい = Publisher の subscribe も適当な単位で分割した方が見通しがよい
+- Error が発生する処理の場合は、条件監視とは別に、エラーハンドリング専用の Publisher の監視をさせたほうが見通しがよい ＝ Publisher の subscribe も適当な単位で分割した方が見通しがよい
 
 以上になります。
