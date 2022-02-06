@@ -268,7 +268,7 @@ let checkPublisherA: AnyPublisher<Bool, Never> = publisherA
 
 let checkPublisherB: AnyPublisher<Bool, Never> = publisherB
     .map { $0 != "" }
-    .replaceError(with: false) // replaceErrorでNeverにする
+    .replaceError(with: false) // replaceError で Neverにする
     .eraseToAnyPublisher()
 
 let checkPublisherC: AnyPublisher<Bool, Never> = publisherC
@@ -305,11 +305,11 @@ publisherB
     .store(in: &cancellables)
 ```
 
-条件判定用の subscribe 側で publisherB のエラーハンドリングを行おうことはおすすめしません。
+余談になりますが、条件判定用の subscribe 側で publisherB のエラーハンドリングを行おうことはおすすめしません。
 
 それを行おうとするとエラー検知用の AnyPublisher を用意して、それを　`zip()` でつなぐようなことをしなければならなくなり、Combine 処理を複雑にすることにつながります。
 
-Publisher もそうですが、その subscribe も目的の用途に合わせて、それぞれ分割して用意してあげると見通しが良くなります。
+Publisher もそうですが、その subscribe も目的の用途に合わせて、それぞれ分割して用意してあげると見通しがよくなります。
 
 # 結論
 
