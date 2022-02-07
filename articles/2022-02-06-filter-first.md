@@ -209,7 +209,7 @@ var cancellable = publisherA // Instance method 'combineLatest' requires the typ
 
 このようなときの修正案をいくつか挙げたいと思います。
 
-### 修正案1: Failure の型を Error に統一する
+### (8-1) 修正案1: Failure の型を Error に統一する
 
 Failure が Never の publisherA、publisherC に `setFailureType(to: Error.self)` して、Error 型に揃えることができます。
 
@@ -233,7 +233,7 @@ var cancellable = publisherA.setFailureType(to: Error.self).eraseToAnyPublisher(
 
 とても見づらいですね。。。
 
-### 修正案2: Failure の型を Never に統一する
+### (8-2) 修正案2: Failure の型を Never に統一する
 
 `replaceError(with:)` で Failure を Never に変換することができます。
 
@@ -257,7 +257,7 @@ var cancellable = publisherA
 
 一見、いい感じですが、publisherB のエラー発生時に空文字に変換することが `b != ""` の結果を `false` にするという暗黙的実装が含まれてしまいます。
 
-### 修正案3: Failure の型を Never にした Publisher を用意する
+### (8-3) 修正案3: Failure の型を Never にした Publisher を用意する
 
 つまり、Publisher の分割案です。
 
