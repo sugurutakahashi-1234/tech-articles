@@ -13,7 +13,7 @@ published: true
 ```swift
 extension Array where Element: Equatable {
     func diffIndices(from oldArray: [Element]) -> [Int] {
-        self.indices.indices.compactMap { index in
+        self.indices.compactMap { index in
             if oldArray.indices.contains(index) {
                 if self[index] != oldArray[index] {
                     return index
