@@ -1,5 +1,5 @@
 ---
-title: "【Swift, Combine】prefix(untilOutputFrom: ) で他のPublisherの出力を条件に完了させる"
+title: "【Swift】【Combine】prefix(untilOutputFrom:)で他のPublisherの出力を条件に完了させる"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift", "Combine"]
