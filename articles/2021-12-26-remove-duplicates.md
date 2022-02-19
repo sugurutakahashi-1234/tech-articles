@@ -1,5 +1,5 @@
 ---
-title: "【Swift】removeDuplicates で nil を含む配列を扱うときの compactMap の位置による挙動の違いについて"
+title: "[Swift] removeDuplicates で nil を含む配列を扱うときの compactMap の位置による挙動の違いについて"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift","Combine"]

@@ -1,5 +1,5 @@
 ---
-title: "【Swift】throws 関数の中で throws 関数を呼び出したときの挙動【エラー処理】"
+title: "[Swift] throws 関数の中で throws 関数を呼び出したときの挙動【エラー処理】"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]

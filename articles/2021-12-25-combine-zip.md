@@ -1,5 +1,5 @@
 ---
-title: "【Swift】【Combine】zipの完了条件あれこれ"
+title: "[Swift] [Combine] zipの完了条件あれこれ"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift","Combine"]

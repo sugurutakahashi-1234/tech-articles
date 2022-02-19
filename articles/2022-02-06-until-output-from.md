@@ -1,5 +1,5 @@
 ---
-title: "【Swift】【Combine】prefix(untilOutputFrom:)で他のPublisherの出力を条件に完了させる"
+title: "[Swift] [Combine] prefix(untilOutputFrom:)で他のPublisherの出力を条件に完了させる"
 emoji: "🔖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift", "Combine"]
@@ -87,7 +87,7 @@ firstPub.send(4)
 
  [`zip(_:)`](https://developer.apple.com/documentation/combine/publisher/zip(_:)) を用いて、完了を伝播させた場合の細かい挙動については、以下の記事でまとめたので気になる方は参考にしてください。
 
-- [【Swift】【Combine】zipの完了条件あれこれ](https://zenn.dev/ikuraikura/articles/2021-12-25-combine-zip)
+- [[Swift] [Combine] zipの完了条件あれこれ](https://zenn.dev/ikuraikura/articles/2021-12-25-combine-zip)
 
 ちなみに [`combineLatest(_:)`](https://developer.apple.com/documentation/combine/publisher/combinelatest(_:)) は連結した両方の Publisher が完了しない限り完了しないので注意してください。
 
