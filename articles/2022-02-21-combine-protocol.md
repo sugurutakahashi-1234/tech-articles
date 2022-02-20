@@ -90,7 +90,7 @@ protocol PhotoDownloadDriverProtocol {
 
 A 〜 F までの 6 つのパターンの違いを表でまとめると以下になります。
 
-| - | Input                    | Output                                 | 
+| 案 | Input                    | Output                                 | 
 | :--------: | :---------------------: | :------------------------------------: | 
 | A  | `photoIds: [String]`    | `[URL]`                                | 
 | B  | `photoIds: [String]`    | `URL`                                  | 
@@ -98,9 +98,12 @@ A 〜 F までの 6 つのパターンの違いを表でまとめると以下に
 | D  | `photoIds: [String]`    | `PhotoEntity`                          | 
 | E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
 | F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
+
 ## 結論
 
-- | Input | Output | 評価 | `id` と `URL` の紐付けが 可能 or 不可能 | In/Out の型の統一性 | Output の単数形 or 複数形
+結論は以下の表の通りになります。
+
+案 | Input | Output | 評価 | `id` と `URL` の紐付けが 可能 or 不可能 | In/Out の型の統一性 | Output の単数形 or 複数形
 :---: | :---: | :---: | :---: | :---: | :---: | :---:
 A | `[String]` | `[URL]` | x | 不可能☔️ | - | 複数形🌥
 B | `[String]` | `URL` | x | 不可能☔️ | - | 単数形 🌟
@@ -109,7 +112,16 @@ D | `[String]` | `PhotoEntity` | ◯ | 可能🌟 | なし🌥 | 単数形 🌟
 E | `[PhotoEntity]` | `PhotoEntity` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
 F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数形🌥
 
-## インターフェースを適応したDriverの実装
+私は C もしくは E のパターンをお勧めします。D や F もそこまで問題ないと思います。
+
+一方で、A と B はお勧めできません。
+
+## 結論の理由
+
+- インターフェースを適応した Driver の実装
+- subscribe 側の実装
+
+## インターフェースを適応した Driver の実装
 
 ```swift
 class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
@@ -157,7 +169,7 @@ class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
 let photoDownloadDriver: PhotoDownloadDriver = .init()
 ```
 
-## subscribe 側の記述
+## subscribe 側の実装
 
 ```swift
 // パターンAの場合
