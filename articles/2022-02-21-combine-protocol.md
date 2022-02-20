@@ -102,7 +102,7 @@ A 〜 F までの 6 つのパターンの違いを表でまとめると以下に
 
 パターン | Input | Output | 評価 | Input と Output の突き合わせが 可能 or 不可能 | Input と Output の型の統一性 | Output が 単数形 or 複数形
 :---: | :---: | :---: | :---: | :---: | :---: | :---:
-A | `[String]` | `[URL]` | x | 不可能☔️ | - | 複数形🌟
+A | `[String]` | `[URL]` | x | 不可能☔️ | - | 複数形🌥
 B | `[String]` | `URL` | x | 不可能☔️ | - | 単数形 🌟
 C | `[String]` | `(String, URL)` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
 D | `[String]` | `PhotoEntity` | ◯ | 可能🌟 | なし🌥 | 単数形 🌟
