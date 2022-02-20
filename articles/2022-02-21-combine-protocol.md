@@ -1,5 +1,5 @@
 ---
-title: "[Swift] [Combine] 配列を引数にとる関数の return が AnyPublisher の場合のインターフェースの検討"
+title: "[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPublisher の場合のインターフェースの検討"
 emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
@@ -11,7 +11,16 @@ published: false
 - a
 - b
 
-# もげもげ
+# はじめに
+
+Combine の特性上、配列処理との相性がとても良いです。
+
+今回は、配列を引数にとる関数の戻り値が AnyPublisher の場合のインターフェースの検討をおこなっていきます。
+
+# やりたいこと
+
+具体例があると想像しやすいので、以下の定義されているときに、『複数の写真のサムネイルに取得して、それを Realm などのデータストアに永続化する処理』をやりたいとして、それを例に検討します。
+
 
 ```swift
 import Combine
@@ -19,14 +28,15 @@ import Foundation
 
 private var cancellables: Set<AnyCancellable> = []
 
-
 // PhotoEntity
 struct PhotoEntity: Identifiable {
+    /// id
     let id: String
+    /// サムネイルのURL(サムネイルの未取得の場合は nil)
     var thumbnail: URL?
 }
 
-// サムネイルの未取得のPhotoEntity
+// サムネイルの未取得の PhotoEntity の配列
 let photos: [PhotoEntity] = [.init(id: UUID().uuidString), .init(id: UUID().uuidString)]
 
 // サムネイルのfetch処理
@@ -36,7 +46,7 @@ func fetchThumbnail(photoId: String) -> URL {
 
 // 保存処理（単体版）
 func store(photo: PhotoEntity) {
-    // Realmなどへの保存処理...
+    // Realm などへのデータストアへの保存処理...
     print("PhotoEntityの保存に成功しました！ id: \(photo.id), thumbnail: \(String(describing: photo.thumbnail))")
 }
 
@@ -46,7 +56,15 @@ func store(photos: [PhotoEntity]) {
 }
 ```
 
+前提条件は以下になります。
+
+- サムネイルの未取得の `PhotoEntity` の配列がある
+- サムネイルの URL の fetch 処理には `PhotoEntity` の `id` が必要
+- Realm などへのデータストアへの保存処理は単体でも複数でも保存が可能である
+
 ## インターフェースの案
+
+AnyPublisher を返却する関数の案として、以下の A 〜 F までの 6 つのパターンを考えたとき、どれが良いかを検討します。
 
 ```swift
 protocol PhotoDownloadDriverProtocol {
@@ -69,6 +87,27 @@ protocol PhotoDownloadDriverProtocol {
     func fetchThumbnailF(photos: [PhotoEntity]) -> AnyPublisher<[PhotoEntity], Never>
 }
 ```
+
+A 〜 F までの 6 つのパターンの違いを表でまとめると以下になります。
+
+| パターン名 | 引数                    | Output                                 | 
+| :--------: | :---------------------: | :------------------------------------: | 
+| パターン A  | `photoIds: [String]`    | `[URL]`                                | 
+| パターン B  | `photoIds: [String]`    | `URL`                                  | 
+| パターン C  | `photoIds: [String]`    | `(photoId: String, thumbnailURL: URL)` | 
+| パターン D  | `photoIds: [String]`    | `PhotoEntity`                          | 
+| パターン E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
+| パターン F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
+## 結論
+
+パターン | Input | Output | 評価 | Input と Output の突き合わせが 可能 or 不可能 | Input と Output の型の統一性 | Output が 単数形 or 複数形
+--- | --- | --- | --- | --- | --- | ---
+A | `photoIds: [String]` | `[URL]` | x | 不可能☔️ | - | 複数形🌟
+B | `photoIds: [String]` | `URL` | x | 不可能☔️ | - | 単数形 🌟
+C | `photoIds: [String]` | `(String, URL)` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
+D | `photoIds: [String]` | `PhotoEntity` | ◯（Cより劣る） | 可能🌟 | なし🌥 | 単数形 🌟
+E | `photos: [PhotoEntity]` | `PhotoEntity` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
+F | `photos: [PhotoEntity]` | `[PhotoEntity]` | ◯（Eより劣る） | 可能🌟 | あり🌟 | 複数形🌥
 
 ## インターフェースを適応したDriverの実装
 
