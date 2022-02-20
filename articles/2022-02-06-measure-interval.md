@@ -1,6 +1,6 @@
 ---
 title: "[Swift] [Combine] measureInterval(using:)を使って出力の間隔を取得する"
-emoji: "🔖"
+emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift", "Combine"]
 published: true

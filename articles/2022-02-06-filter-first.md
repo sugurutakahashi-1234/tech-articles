@@ -1,6 +1,6 @@
 ---
 title: "[Swift] [Combine] 複数条件を監視するなら combineLatest, filter, first の組み合わせがおすすめ"
-emoji: "🔖"
+emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift", "Combine"]
 published: true

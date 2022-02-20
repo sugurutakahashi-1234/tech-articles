@@ -1,6 +1,6 @@
 ---
 title: "[Swift] [Combine] ストリームに reduce() 処理の途中経過を流したい場合 -> scan() を使おう！"
-emoji: "🔖"
+emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift", "Combine"]
 published: true
