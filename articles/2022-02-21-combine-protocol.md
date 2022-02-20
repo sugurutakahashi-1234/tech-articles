@@ -90,14 +90,14 @@ protocol PhotoDownloadDriverProtocol {
 
 A 〜 F までの 6 つのパターンの違いを表でまとめると以下になります。
 
-| パターン名 | 引数                    | Output                                 | 
+| - | Input                    | Output                                 | 
 | :--------: | :---------------------: | :------------------------------------: | 
-| パターン A  | `photoIds: [String]`    | `[URL]`                                | 
-| パターン B  | `photoIds: [String]`    | `URL`                                  | 
-| パターン C  | `photoIds: [String]`    | `(photoId: String, thumbnailURL: URL)` | 
-| パターン D  | `photoIds: [String]`    | `PhotoEntity`                          | 
-| パターン E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
-| パターン F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
+| A  | `photoIds: [String]`    | `[URL]`                                | 
+| B  | `photoIds: [String]`    | `URL`                                  | 
+| C  | `photoIds: [String]`    | `(String, URL)` | 
+| D  | `photoIds: [String]`    | `PhotoEntity`                          | 
+| E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
+| F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
 ## 結論
 
 - | Input | Output | 評価 | `id` と `URL` の紐付けが 可能 or 不可能 | In/Out の型の統一性 | Output の単数形 or 複数形
