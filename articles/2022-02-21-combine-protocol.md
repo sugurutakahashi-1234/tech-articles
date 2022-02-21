@@ -100,6 +100,8 @@ A 〜 F までの 6 つの案の違いを表でまとめると以下になりま
 | E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
 | F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
 
+これらのインターフェースの中でどれがよさそうか検討します。
+
 ## 結論
 
 結論は以下の表の通りになります。
