@@ -1,6 +1,6 @@
 ---
 title: "[Swift] Computed Property でも例外を throw できる件"
-emoji: "🔖"
+emoji: "🕊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
 published: true

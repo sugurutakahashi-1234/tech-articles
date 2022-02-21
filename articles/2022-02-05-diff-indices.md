@@ -1,6 +1,6 @@
 ---
 title: "[Swift] 配列を比較して差分のあるindexの配列を返却する便利関数を作った件"
-emoji: "🔖"
+emoji: "🕊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
 published: true

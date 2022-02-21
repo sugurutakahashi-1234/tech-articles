@@ -1,6 +1,6 @@
 ---
 title: "[Swift] 平面座標系でのベクトルの内積の公式を用いてある3点からなるなす角を求める方法"
-emoji: "🔖"
+emoji: "🕊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
 published: true

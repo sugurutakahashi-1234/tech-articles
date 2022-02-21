@@ -1,6 +1,6 @@
 ---
 title: "[Swift] 既に存在するファイルに対して上書きコピーできない話"
-emoji: "🔖"
+emoji: "🕊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift","FileManager"]
 published: true
