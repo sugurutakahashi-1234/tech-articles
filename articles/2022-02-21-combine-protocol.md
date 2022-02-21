@@ -64,31 +64,31 @@ func store(photos: [PhotoEntity]) {
 
 ## インターフェースの案
 
-AnyPublisher を返却する関数の案として、以下の A 〜 F までの 6 つのパターンを考えたとき、どれが良いかを検討します。
+AnyPublisher を返却する関数の案として、以下の A 〜 F までの 6 つの案を考えたとき、どれが良いかを検討します。
 
 ```swift
 protocol PhotoDownloadDriverProtocol {
-    // パターンA
+    // 案 A
     func fetchThumbnailA(photoIds: [String]) -> AnyPublisher<[URL], Never>
     
-    // パターンB
+    // 案 B
     func fetchThumbnailB(photoIds: [String]) -> AnyPublisher<URL, Never>
     
-    // パターンC
+    // 案 C
     func fetchThumbnailC(photoIds: [String]) -> AnyPublisher<(photoId: String, thumbnailURL: URL), Never>
     
-    // パターンD
+    // 案 D
     func fetchThumbnailD(photoIds: [String]) -> AnyPublisher<PhotoEntity, Never>
     
-    // パターンE
+    // 案 E
     func fetchThumbnailE(photos: [PhotoEntity]) -> AnyPublisher<PhotoEntity, Never>
     
-    // パターンF
+    // 案 F
     func fetchThumbnailF(photos: [PhotoEntity]) -> AnyPublisher<[PhotoEntity], Never>
 }
 ```
 
-A 〜 F までの 6 つのパターンの違いを表でまとめると以下になります。
+A 〜 F までの 6 つの案の違いを表でまとめると以下になります。
 
 | 案 | Input                    | Output                                 | 
 | :--------: | :---------------------: | :------------------------------------: | 
@@ -112,54 +112,57 @@ D | `[String]` | `PhotoEntity` | ◯ | 可能🌟 | なし🌥 | 単数形 🌟
 E | `[PhotoEntity]` | `PhotoEntity` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
 F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数形🌥
 
-私は C もしくは E のパターンをお勧めします。D や F もそこまで問題ないと思います。
+私は 案 C もしくは 案 E をお勧めします。案 D や 案 F もそこまで問題ないと思います。
 
-一方で、A と B はお勧めできません。
+一方で、案 A と 案 B はお勧めできません。
 
-## 結論の理由
+## 結論に至った理由
 
-- インターフェースを適応した Driver の実装
-- subscribe 側の実装
+結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装してみるとわかるかと思います。
 
 ## インターフェースを適応した Driver の実装
 
+Driver の実装はどのパターンでも、インターフェースに合わせて実装しているだけなので、良い/悪いの差は特にない認識です。
+
+もし、すでにサムネイル取得済みの写真のついて、サムネイルの取得をスキップするかどうかの制御は Driver 内ではなく、Driver を使用する方の実装に寄せるべきかと思いますので、Driver では特に考慮しません。
+
 ```swift
 class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
-    // パターンA
+    // 案 A
     func fetchThumbnailA(photoIds: [String]) -> AnyPublisher<[URL], Never> {
         Just(photoIds.map { fetchThumbnail(photoId: $0) })
             .eraseToAnyPublisher()
     }
     
-    // パターンB
+    // 案 B
     func fetchThumbnailB(photoIds: [String]) -> AnyPublisher<URL, Never> {
         photoIds.publisher
             .map { fetchThumbnail(photoId: $0) }
             .eraseToAnyPublisher()
     }
     
-    // パターンC
+    // 案 C
     func fetchThumbnailC(photoIds: [String]) -> AnyPublisher<(photoId: String, thumbnailURL: URL), Never> {
         photoIds.publisher
             .map { (photoId: $0, thumbnailURL: fetchThumbnail(photoId: $0)) }
             .eraseToAnyPublisher()
     }
     
-    // パターンD
+    // 案 D
     func fetchThumbnailD(photoIds: [String]) -> AnyPublisher<PhotoEntity, Never> {
         photoIds.publisher
             .map { PhotoEntity(id: $0, thumbnail: fetchThumbnail(photoId: $0)) }
             .eraseToAnyPublisher()
     }
     
-    // パターンE
+    // 案 E
     func fetchThumbnailE(photos: [PhotoEntity]) -> AnyPublisher<PhotoEntity, Never> {
         photos.publisher
             .map { PhotoEntity(id: $0.id, thumbnail: fetchThumbnail(photoId: $0.id)) }
             .eraseToAnyPublisher()
     }
     
-    // パターンF
+    // 案 F
     func fetchThumbnailF(photos: [PhotoEntity]) -> AnyPublisher<[PhotoEntity], Never> {
         Just(photos.map { PhotoEntity(id: $0.id, thumbnail: fetchThumbnail(photoId: $0.id)) })
             .eraseToAnyPublisher()
@@ -171,44 +174,49 @@ let photoDownloadDriver: PhotoDownloadDriver = .init()
 
 ## subscribe 側の実装
 
+ここの実装の差が本記事のポイントになります。
+
 ```swift
-// パターンAの場合
+// 案 A の場合
 photoDownloadDriver.fetchThumbnailA(photoIds: photos.map { $0.id })
     .sink { print("completion A: \($0)") } receiveValue: { urls in
+        // 入力数と出力数があっているかが暗黙的である
         guard photos.count == urls.count else {
             assertionFailure("photos.count is not equal urls.count.")
             return
         }
+        // 入力した photos の index と出力の urls の index が対応していることが暗黙的である
         store(photos: photos.indices.map { PhotoEntity(id: photos[$0].id, thumbnail: urls[$0]) })
     }
     .store(in: &cancellables)
 
-// パターンBの場合
+// 案 B の場合
 photoDownloadDriver.fetchThumbnailB(photoIds: photos.map { $0.id })
-    .zip(photos.publisher)
+    .zip(photos.publisher) // zip() で出力を合わせる（入出力の組み合わせが一致していることは暗黙的である）
     .sink { print("completion B: \($0)") } receiveValue: { url, photo in
+        // 入力した photos の id の順番と出力のサムネイルの URL の順番が対応していることが暗黙的である
         store(photo: PhotoEntity(id: photo.id, thumbnail: url))
     }
     .store(in: &cancellables)
 
-// パターンCの場合
+// 案 C の場合
 photoDownloadDriver.fetchThumbnailC(photoIds: photos.map { $0.id })
     .sink { print("completion C: \($0)") } receiveValue: { photoId, thumbnailURL in
         store(photo: PhotoEntity(id: photoId, thumbnail: thumbnailURL))
     }
     .store(in: &cancellables)
 
-// パターンDの場合
+// 案 D の場合
 photoDownloadDriver.fetchThumbnailD(photoIds: photos.map { $0.id })
     .sink { print("completion D: \($0)") } receiveValue: { store(photo: $0) }
     .store(in: &cancellables)
 
-// パターンEの場合
+// 案 E の場合
 photoDownloadDriver.fetchThumbnailE(photos: photos)
     .sink { print("completion E: \($0)") } receiveValue: { store(photo: $0) }
     .store(in: &cancellables)
 
-// パターンFの場合
+// 案 F の場合
 photoDownloadDriver.fetchThumbnailF(photos: photos)
     .sink { print("completion F: \($0)") } receiveValue: { store(photos: $0) }
     .store(in: &cancellables)
