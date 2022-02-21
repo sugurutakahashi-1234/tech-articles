@@ -121,9 +121,9 @@ F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数�
 
 ## 結論に至った理由
 
-結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装してみるとわかるかと思います。
+結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装をみてみるとわかるかと思います。
 
-## インターフェースを適応した Driver の実装
+## Driver の実装
 
 Driver の実装はどのパターンでも、インターフェースに合わせて実装しているだけなので、良い/悪いの差は特にない認識です。
 
@@ -174,6 +174,8 @@ class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
 
 let photoDownloadDriver: PhotoDownloadDriver = .init()
 ```
+
+↑ この記事の内容として Driver の実装は特に気にしなくても大丈夫です。
 
 ## subscribe 側の実装
 
