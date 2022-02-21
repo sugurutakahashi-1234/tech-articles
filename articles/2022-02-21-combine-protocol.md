@@ -304,6 +304,8 @@ photoDownloadDriver.fetchThumbnailF(photos: photos)
 
 ただ、案 C のように `nil` の可能性を排除できないのは微妙なところですが、それを良しとするかどうかはケースバイケースだと思われます。
 
+### Output は 単体 or 配列 のどちらがよいのか？
+
 次に、`PhotoEntity` の**単体**を返却する案 E と、`PhotoEntity` の**配列**を返却する案 F を比較します。
 
 Output が来たものから順に、すぐに `store()` の処理を行うことができるという点から、案 E のほうが良いと思われます。
