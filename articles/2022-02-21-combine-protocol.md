@@ -1,5 +1,5 @@
 ---
-title: "[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPublisher の場合のインターフェースの検討"
+title: "[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPublisher であるときのインターフェースの検討"
 emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
