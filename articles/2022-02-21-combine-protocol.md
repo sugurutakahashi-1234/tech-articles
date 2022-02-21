@@ -115,7 +115,7 @@ B | `[String]` | `URL` | x | 不可能☔️ | - | 単数形 🌟
 C | `[String]` | `(String, URL)` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
 D | `[String]` | `PhotoEntity` | ◯ | 可能🌟 | なし🌥 | 単数形 🌟
 E | `[PhotoEntity]` | `PhotoEntity` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
-F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数形🌥
+F | `[PhotoEntity]` | `[PhotoEntity]` | △ | 可能🌟 | あり🌟 | 複数形🌥
 
 私は 案 C もしくは 案 E をお勧めします。案 D や 案 F もそこまで問題ないと思います。
 
