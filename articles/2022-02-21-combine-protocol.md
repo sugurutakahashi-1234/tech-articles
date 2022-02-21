@@ -129,7 +129,7 @@ F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数�
 
 Driver の実装はどのパターンでも、インターフェースに合わせて実装しているだけなので、良い/悪いの差は特にない認識です。
 
-もし、すでにサムネイル取得済みの写真のついて、サムネイルの取得をスキップするかどうかの制御は Driver 内ではなく、Driver を使用する方の実装に寄せるべきかと思いますので、Driver では特に考慮しません。
+すでにサムネイル取得済みの写真のついて、サムネイルの取得をスキップしたい場合は、その制御の実装は Driver 内ではなく、Driver を使用する方の実装に寄せるべきかと思いますので、Driver 内では特に実装しません。
 
 ```swift
 class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
@@ -177,7 +177,7 @@ class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
 let photoDownloadDriver: PhotoDownloadDriver = .init()
 ```
 
-↑ この記事の趣旨として Driver の実装は特に気にしなくても問題ありません。
+※ この記事の趣旨として Driver の実装は特に気にしなくても問題ありません。
 
 # subscribe 側の実装
 
