@@ -102,22 +102,26 @@ A 〜 F までの 6 つの案の違いを表でまとめると以下になりま
 | E  | `photos: [PhotoEntity]` | `PhotoEntity`                          | 
 | F  | `photos: [PhotoEntity]` | `[PhotoEntity]`                        | 
 
-これらのインターフェースの中でどれがよさそうか検討します。
+これらのインターフェースの案の中で、どれがよさそうか検討します。
 
-# 結論
+# 先に結論
 
 結論は以下の表の通りになります。
 
-案 | Input | Output | 評価 | `id` と `URL` の紐付けが 可能 or 不可能 | In/Out の型の統一性 | Output の単数形 or 複数形
-:---: | :---: | :---: | :---: | :---: | :---: | :---:
-A | `[String]` | `[URL]` | x | 不可能☔️ | - | 複数形🌥
-B | `[String]` | `URL` | x | 不可能☔️ | - | 単数形 🌟
-C | `[String]` | `(String, URL)` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
-D | `[String]` | `PhotoEntity` | ◯ | 可能🌟 | なし🌥 | 単数形 🌟
-E | `[PhotoEntity]` | `PhotoEntity` | ◎ | 可能🌟 | あり🌟 | 単数形 🌟
-F | `[PhotoEntity]` | `[PhotoEntity]` | △ | 可能🌟 | あり🌟 | 複数形🌥
+『**評価**』 の列を見ていただければと思います。
 
-私は 案 C もしくは 案 E をお勧めします。案 D や 案 F もそこまで問題ないと思います。
+案 | Input | Output | **評価** | `id` と `URL` の紐付けが 可能 or 不可能 | In/Out の型の統一性 | Output の単数形 or 複数形
+:---: | :---: | :---: | :---: | :---: | :---: | :---:
+A | `[String]` | `[URL]` | **x** | 不可能☔️ | - | 複数形🌥
+B | `[String]` | `URL` | **x** | 不可能☔️ | - | 単数形 🌟
+C | `[String]` | `(String, URL)` | **◎** | 可能🌟 | あり🌟 | 単数形 🌟
+D | `[String]` | `PhotoEntity` | **◯** | 可能🌟 | なし🌥 | 単数形 🌟
+E | `[PhotoEntity]` | `PhotoEntity` | **◎** | 可能🌟 | あり🌟 | 単数形 🌟
+F | `[PhotoEntity]` | `[PhotoEntity]` | **△** | 可能🌟 | あり🌟 | 複数形🌥
+
+評価が ◎ の案 C もしくは 案 E をお勧めします。
+
+案 D や 案 F もそこまで問題ないと思います。
 
 一方で、案 A と 案 B はお勧めできません。
 
