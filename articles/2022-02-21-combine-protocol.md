@@ -65,7 +65,7 @@ func store(photos: [PhotoEntity]) {
 - Realm などへのデータストアへの保存処理の `store()` は単体でも複数でも保存が可能である
 - サムネイル取得処理は AnyPublisher 型で返却され、それを subscribe した Output を `store()` していくという実装方針
 
-## インターフェースの案
+# インターフェースの案
 
 AnyPublisher を返却する関数の案として、以下の A 〜 F までの 6 つの案を考えたとき、どれが良いかを検討します。
 
@@ -121,11 +121,11 @@ F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数�
 
 一方で、案 A と 案 B はお勧めできません。
 
-## 結論に至った理由
+# 結論に至った理由
 
 **結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装をみてみるとわかるかと思います。**
 
-## Driver の実装
+# Driver の実装
 
 Driver の実装はどのパターンでも、インターフェースに合わせて実装しているだけなので、良い/悪いの差は特にない認識です。
 
@@ -179,7 +179,7 @@ let photoDownloadDriver: PhotoDownloadDriver = .init()
 
 ↑ この記事の趣旨として Driver の実装は特に気にしなくても問題ありません。
 
-## subscribe 側の実装
+# subscribe 側の実装
 
 ここの実装の差が本記事のポイントになります。
 
@@ -231,7 +231,7 @@ photoDownloadDriver.fetchThumbnailF(photos: photos)
 
 それぞれ個別に検討していきます。
 
-### 案 A、案 B の場合
+## 案 A、案 B の場合
 
 案 A と案 B については他の案と大きく異なります。
 
@@ -263,7 +263,7 @@ photoDownloadDriver.fetchThumbnailB(photoIds: photos.map { $0.id })
 
 Output の順番が必ず、Input の順番を維持しているのであれば、問題ないのですが、それを保証するように Driver の実装を行う必要がでてきてしまい、**暗黙的な制約が生じてしまうので、そのような実装は避けた方がよいです。**
 
-### 案 C、案 D の場合
+## 案 C、案 D の場合
 
 案 A と案 B と違い、案 C と案 D の Output は、`(id, サムネイルのURL)` が組み合わせになったタプル、もしくは、`id` と `サムネイルのURL` がセットになった `PhotoEntity` の struct で返却されるので、**暗黙的な紐付けを行うことなく、`store()` することができます。**
 
@@ -284,7 +284,7 @@ photoDownloadDriver.fetchThumbnailD(photoIds: photos.map { $0.id })
 
 また、案C であれば、『`サムネイルのURL` が `nil` かもしれない』という心配もする必要がないのも、メリットでもあります。
 
-### 案 E、案 F の場合
+## 案 E、案 F の場合
 
 案 D の Input が `id` の単体であったものを、`PhotoEntity` に変更したものが案 E、さらに、案 E の Output を配列にしたものが案 F となります。
 
