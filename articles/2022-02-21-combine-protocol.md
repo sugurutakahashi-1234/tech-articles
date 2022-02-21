@@ -175,7 +175,7 @@ class PhotoDownloadDriver: PhotoDownloadDriverProtocol {
 let photoDownloadDriver: PhotoDownloadDriver = .init()
 ```
 
-↑ この記事の内容として Driver の実装は特に気にしなくても大丈夫です。
+↑ この記事の趣旨として Driver の実装は特に気にしなくても問題ありません。
 
 ## subscribe 側の実装
 
