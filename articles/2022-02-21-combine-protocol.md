@@ -102,7 +102,7 @@ A 〜 F までの 6 つの案の違いを表でまとめると以下になりま
 
 これらのインターフェースの中でどれがよさそうか検討します。
 
-## 結論
+# 結論
 
 結論は以下の表の通りになります。
 
@@ -121,7 +121,7 @@ F | `[PhotoEntity]` | `[PhotoEntity]` | ◯ | 可能🌟 | あり🌟 | 複数�
 
 ## 結論に至った理由
 
-結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装をみてみるとわかるかと思います。
+**結論に至った理由は AnyPublisher を返却を受け取る subscribe 側の実装をみてみるとわかるかと思います。**
 
 ## Driver の実装
 
@@ -181,7 +181,7 @@ let photoDownloadDriver: PhotoDownloadDriver = .init()
 
 ここの実装の差が本記事のポイントになります。
 
-一旦、全てのパターンで記述してみたものを並べたいと思います。
+一旦、全てのパターンで実装してみたものを並べたいと思います。
 
 ```swift
 // 案 A の場合
@@ -226,6 +226,8 @@ photoDownloadDriver.fetchThumbnailF(photos: photos)
     .sink { print("completion F: \($0)") } receiveValue: { store(photos: $0) }
     .store(in: &cancellables)
 ```
+
+それぞれ個別で検討していきます。
 
 ### 案 A、案 B の場合
 
