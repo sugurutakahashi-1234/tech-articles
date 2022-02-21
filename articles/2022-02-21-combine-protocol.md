@@ -3,7 +3,7 @@ title: "[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPubli
 emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
-published: false
+published: true
 ---
 
 # 伝えたいこと
