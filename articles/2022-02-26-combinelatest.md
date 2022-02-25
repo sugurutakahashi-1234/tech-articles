@@ -79,7 +79,7 @@ pub1.send(5)
 
 ```swift
 pub1
-    .zip(pub2) { $0 * $1}
+    .zip(pub2) { $0 * $1 }
     .sink { print("Result: \($0).") }
     .store(in: &cancellables)
 
