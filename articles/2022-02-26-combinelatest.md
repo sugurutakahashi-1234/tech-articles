@@ -1,5 +1,5 @@
 ---
-title: "[Swift] [Combine] combineLatest() -> map() は combineLatest() {} で書き直せる"
+title: "[Swift] [Combine] combineLatest() -> map() は combineLatest() {} で書き直せる件"
 emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
