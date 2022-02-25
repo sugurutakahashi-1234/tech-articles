@@ -74,6 +74,23 @@ pub1.send(5)
 // Result: 60.
 ```
 
+
+## `zip()` でも同様
+
+```swift
+pub1
+    .zip(pub2) { $0 * $1}
+    .sink { print("Result: \($0).") }
+    .store(in: &cancellables)
+
+pub1.send(2)
+pub2.send(3)
+// Result: 6.
+
+pub1.send(4)
+// zip() は揃わないと出力なし！！
+```
+
 ## `flatMap()` は以下のようになる
 
 ### `combineLatest() {}` を使わない場合
