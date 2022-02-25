@@ -1,5 +1,5 @@
 ---
-title: "[Swift] [Combine] combineLatest() -> map() は combineLatest() { <map() で行う処理> } で書き直せる"
+title: "[Swift] [Combine] combineLatest() -> map() は combineLatest() {} で書き直せる"
 emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
@@ -20,7 +20,7 @@ let pub2 = PassthroughSubject<Int, Never>()
 let pub3 = PassthroughSubject<Int, Never>()
 ```
 
-## `combineLatest()` -> `map()`
+## `combineLatest()` -> `map()` の場合
 
 ```swift
 pub1
@@ -37,7 +37,7 @@ pub1.send(4)
 // Result: 12.
 ```
 
-## `combineLatest() { <map() で行う処理> }`
+## `combineLatest() {}` の場合
 
 ```swift
 pub1
@@ -53,7 +53,7 @@ pub1.send(4)
 // Result: 12.
 ```
 
-## もちろんつなげることも可能
+## つなげることも可能
 
 ```swift
 pub1
