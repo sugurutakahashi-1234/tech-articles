@@ -48,7 +48,7 @@ timerPublisher
 `DispatchQueue` は「ナノ秒」で、`RunLoop` は「秒」単位ですね。
 
 
-# `Stride` → `Double`(秒) 変換する
+# `Stride` → `Double`(秒) に変換する
 
 以下のような、extension を生やしました。
 
