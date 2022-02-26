@@ -6,9 +6,9 @@ topics: ["Swift", "Combine"]
 published: true
 ---
 
-# `.prefix(untilOutputFrom: )`
+# `.prefix(untilOutputFrom:)`
 
-Combine には [`.prefix(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) という他の Publisher の出力を条件に、そのストリームの出力を止めて完了させるという、かなりマニアックな関数が用意されていたので紹介したいと思います。
+Combine には [`.prefix(untilOutputFrom:)`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) という他の Publisher の出力を条件に、そのストリームの出力を止めて完了させるという、かなりマニアックな関数が用意されていたので紹介したいと思います。
 
 ## サンプルコード
 
@@ -81,7 +81,7 @@ firstPub.send(4)
 
 これは `secondPub.send(completion: .finished)` だけではなく、 `secondPub.send(completion: .failure(Error))` とした場合も同様です。
 
-では、出力条件ではなく、完了条件でストリームを止める `.prefix(untilCompletionFrom: )` みたいなものはないのかと探しましたが、ありませんでした。。。
+では、出力条件ではなく、完了条件でストリームを止める `.prefix(untilCompletionFrom:)` みたいなものはないのかと探しましたが、ありませんでした。。。
 
 今のところ、完了条件を伝搬させるには [`zip(_:)`](https://developer.apple.com/documentation/combine/publisher/zip(_:)) を使っていくしかなさそうです。
 
@@ -92,9 +92,9 @@ firstPub.send(4)
 ちなみに [`combineLatest(_:)`](https://developer.apple.com/documentation/combine/publisher/combinelatest(_:)) は連結した両方の Publisher が完了しない限り完了しないので注意してください。
 
 
-# 補足 `.drop(untilOutputFrom: )` というものもある
+# 補足 `.drop(untilOutputFrom:)` というものもある
 
-[`.prefix(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) の逆で、他の Publisher の出力を条件に出力を開始する [`.drop(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/fail/drop(untiloutputfrom:)) というものがあります。
+[`.prefix(untilOutputFrom:)`](https://developer.apple.com/documentation/combine/just/prefix(untiloutputfrom:)) の逆で、他の Publisher の出力を条件に出力を開始する [`.drop(untilOutputFrom:)`](https://developer.apple.com/documentation/combine/fail/drop(untiloutputfrom:)) というものがあります。
 
 サンプルコードは以下になります。
 
@@ -139,4 +139,4 @@ secondPub.send("b")
 // secondPub output: b
 ```
 
-正直、[`combineLatest(_:)`](https://developer.apple.com/documentation/combine/publisher/combinelatest(_:)) でも表現できなくないですが、その出力のタプルの片方を無視している場合などは [`.drop(untilOutputFrom: )`](https://developer.apple.com/documentation/combine/fail/drop(untiloutputfrom:)) で書いてあげるのが適切かもしれません。
+正直、[`combineLatest(_:)`](https://developer.apple.com/documentation/combine/publisher/combinelatest(_:)) でも表現できなくないですが、その出力のタプルの片方を無視している場合などは [`.drop(untilOutputFrom:)`](https://developer.apple.com/documentation/combine/fail/drop(untiloutputfrom:)) で書いてあげるのが適切かもしれません。

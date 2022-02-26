@@ -6,9 +6,9 @@ topics: ["Swift", "Combine"]
 published: true
 ---
 
-# `measureInterval(using: ) `
+# `measureInterval(using:) `
 
-Combine には [`measureInterval(using: )`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) という Publisher の出力の間隔を取得することができる関数が用意されているのでそれを紹介してみたいと思います。
+Combine には [`measureInterval(using:)`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) という Publisher の出力の間隔を取得することができる関数が用意されているのでそれを紹介してみたいと思います。
 
 ## サンプルコード
 
@@ -40,7 +40,7 @@ timerPublisher
 // timerPublisher: 2022-02-05 11:14:21 +0000
 ```
 
-ここで、[`measureInterval(using: )`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) を間に噛ませると以下のようになります。
+ここで、[`measureInterval(using:)`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) を間に噛ませると以下のようになります。
 
 ```swift
 timerPublisher
@@ -55,7 +55,7 @@ timerPublisher
 // measureInterval: Stride(magnitude: 1.9998070001602173)
 ```
 
-[`measureInterval(using: )`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) を間に噛ませることで、`時刻` から `時間間隔` に変更されていることがわかります。
+[`measureInterval(using:)`](https://developer.apple.com/documentation/combine/fail/measureinterval(using:options:)) を間に噛ませることで、`時刻` から `時間間隔` に変更されていることがわかります。
 
 
 ```swift
