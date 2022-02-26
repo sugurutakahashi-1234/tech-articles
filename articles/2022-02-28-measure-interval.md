@@ -1,5 +1,5 @@
 ---
-title: "[Swift] [Combine] measureInterval(using:) を使って出力の間隔を秒に変換する"
+title: "[Swift] [Combine] measureInterval(using:) の出力を Stride 型から秒単位に変換する"
 emoji: "🕊"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
