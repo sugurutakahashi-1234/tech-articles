@@ -1,6 +1,6 @@
 ---
 title: "[Swift] [Combine] measureInterval(using:) の出力を Stride 型から秒単位に変換する"
-emoji: "🕊"
+emoji: "🌾"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Swift"]
 published: true
