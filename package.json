@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "crypto-random-string": "^4.0.0",
+    "crypto-random-string": "^5.0.0",
     "request": "^2.88.2",
-    "zenn-cli": "^0.1.106"
+    "zenn-cli": "^0.1.117"
   }
 }
