@@ -8,7 +8,7 @@ published: true
 
 # 動機
 
-環境構築する際に [gitignore.io](https://www.toptal.com/developers/gitignore/) からコマンドラインからファイルが取得できれば楽だと思い、やりかたを探したところ[公式ドキュメント](https://docs.gitignore.io/install/client-applications#node-tejas-kumar)にやり方が書いてありました。
+環境構築する際に [gitignore.io](https://www.toptal.com/developers/gitignore/) からコマンドラインからファイルが取得できれば楽だと思い、やり方を探したところ[公式ドキュメント](https://docs.gitignore.io/install/client-applications#node-tejas-kumar)にやり方が書いてありました。
 
 そのまま紹介したいと思います。
 
