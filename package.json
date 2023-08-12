@@ -12,6 +12,6 @@
   "dependencies": {
     "crypto-random-string": "^5.0.0",
     "request": "^2.88.2",
-    "zenn-cli": "^0.1.117"
+    "zenn-cli": "^0.1.144"
   }
 }
