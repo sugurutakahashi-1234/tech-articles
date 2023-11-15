@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Zenn 記事のディレクトリ TODO: スクリプトの引数にする
-ZENN_DIR="/Users/sugurutakahashi/git/zenn-connects/articles"
+ZENN_DIR="./articles"
 
 # Qiita 記事のディレクトリ
 QIITA_DIR="public"
