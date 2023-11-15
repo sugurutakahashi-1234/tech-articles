@@ -11,8 +11,8 @@ npx qiita pull
 
 # Zenn の記事を Qiita のフォーマットに変換して複製する
 for FILE in $(ls $ZENN_DIR | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}'); do
-    # Qiita の記事ファイル名
-    QIITA_FILE="$QIITA_DIR/$(basename "$FILE" .md).md"
+    # Qiita の記事ファイル名 (接頭辞 'qiita-' を追加)
+    QIITA_FILE="$QIITA_DIR/qiita-$(basename "$FILE" .md).md"
 
     # Zenn の記事を読み込み
     ZENN_ARTICLE=$(<"$ZENN_DIR/$FILE")
@@ -27,7 +27,7 @@ for FILE in $(ls $ZENN_DIR | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}'); do
         QIITA_ID=$(grep '^id:' "$QIITA_FILE" | sed 's/id: //')
     else
         echo "Creating new file $QIITA_FILE..."
-        npx qiita new "$(basename "$FILE" .md)"
+        npx qiita new "qiita-$(basename "$FILE" .md)"
         QIITA_ID="null"
     fi
 
