@@ -1,0 +1,33 @@
+---
+title: '[Swift] zip() を用いて配列操作した場合、ペアが揃っていないと処理が走らない件'
+tags:
+  - Swift
+private: false
+updated_at: '2023-11-15T20:50:30+09:00'
+id: cfb0a6d722cf4dfca072
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
+
+# タイトル回収
+
+以下のように、`words` と `numbers` の要素数が異なる場合など、ペアが揃っていない状態では、処理が走らないので注意が必要です。
+
+```swift
+let words = ["one", "two", "three"]
+let numbers = [1, 2, 3, 4]
+
+for (word, number) in zip(words, numbers) {
+    print("\(word): \(number)")
+}
+
+// (出力)
+// one: 1
+// two: 2
+// three: 3
+↑
+`4` は処理されない！！
+```
+
+以上です。
