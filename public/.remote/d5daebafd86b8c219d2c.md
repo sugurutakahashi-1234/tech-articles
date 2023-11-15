@@ -1,0 +1,139 @@
+---
+title: ls の実行結果を for 文で処理するワンライナー
+tags:
+  - Bash
+private: false
+updated_at: '2020-11-05T03:17:22+09:00'
+id: d5daebafd86b8c219d2c
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
+# やりたいこと
+
+1階層上に複数あるディレクトリの中にあるファイルを今いるディレクトリに全てコピーすること。
+
+つまり、これを↓
+
+```bash:Before
+$ tree -c
+.
+├── a
+│   └── a.text
+├── b
+│   └── b.text
+└── c
+    └── c.text
+```
+
+こうしたい↓
+
+```bash:After
+$ tree -c
+.
+├── a
+│   └── a.text
+├── b
+│   └── b.text
+├── c
+│   └── c.text
+├── a.text
+├── b.text
+└── c.text
+```
+そのときに『 ls の実行結果を for 文で処理するワンライナーがあればうまく行くのに、、、』と思ったので、それを試してみた備忘録になります。
+
+# ls の実行結果を for 文で処理する方法
+
+## 複数行の場合
+
+```bash:複数行（一般化）
+$ for a in $(ls .); do
+   実行させたい処理
+done
+```
+
+```bash:複数行（サンプル）
+$ for a in $(ls .); do
+   echo $a
+done
+
+（実行結果）
+a
+b
+c
+```
+
+## ワンライナーの場合
+
+```bash:ワンライナー（一般化）
+$ for a in $(ls .); 実行させたい処理 $a; done
+```
+
+```bash:ワンライナー（サンプル）
+$ for a in $(ls .); do echo $a; done
+
+（実行結果）
+a
+b
+c
+```
+
+※ `echo $a;` の `;` を忘れずに。
+
+## ワンライナーで for 文を2週することも可能
+
+
+```bash:ワンライナーでfor文を2週
+for a in $(ls .); do for b in $(ls $a); do echo "$a/$b"; done; done
+
+（実行結果）
+a/a.text
+b/b.text
+c/c.text
+```
+
+
+# やりたいことをやってみる
+
+やりたいこと：1階層上に複数あるディレクトリの中にあるファイルを今いるディレクトリに全てコピーする
+
+## 失敗例
+
+```bash
+$ for a in $(ls .); do cp -p "$a/*" . ; done
+
+（実行結果）
+cp: a/*: No such file or directory
+cp: a.text/*: Not a directory
+cp: b/*: No such file or directory
+cp: b.text/*: Not a directory
+cp: c/*: No such file or directory
+cp: c.text/*: Not a directory
+```
+
+なんか怒られた、、、
+こういう書き方だと`*`（ワイルドカード）が展開されないみたいですね。。。
+
+## 成功例
+
+ワイルドカードを使わずに素直に2周させてみました。
+
+```bash
+$ for a in $(ls .); do for b in $(ls $a); do cp -p "$a/$b" .; done; done
+
+$ tree -c
+.
+├── a
+│   └── a.text
+├── b
+│   └── b.text
+├── c
+│   └── c.text
+├── a.text
+├── b.text
+└── c.text
+```
+
+いけた！
+
