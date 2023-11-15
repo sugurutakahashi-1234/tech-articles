@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 0.0 に限りなく近い値である Double.ulpOfOne の有用性'
+title: '[Swift] 0.0 に限りなく近い値である Double.ulpOfOne の有用性について'
 tags:
   - Swift
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: '2023-11-15T21:55:27+09:00'
 id: 301ad170e9f85ef41709
 organization_url_name: null
 slide: false
