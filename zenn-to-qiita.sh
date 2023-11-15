@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Zenn 記事のディレクトリ TODO: スクリプトの引数にする
+# Zenn 記事のディレクトリ
 ZENN_DIR="./articles"
 
 # Qiita 記事のディレクトリ
-QIITA_DIR="public"
+QIITA_DIR="./public"
 
 # Qiita 記事の反映
 npx qiita pull
