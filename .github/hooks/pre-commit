@@ -1,0 +1,2 @@
+#!/bin/sh
+sh zenn-to-qiita.sh
