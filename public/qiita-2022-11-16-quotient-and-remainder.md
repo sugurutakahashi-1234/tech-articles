@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 割り算の商と余りの両方がほしい場合は quotientAndRemainder を使おう'
+title: "[Swift] 割り算の商と余りの両方がほしい場合は quotientAndRemainder を使おう"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: ef0686984a5a45d91713
 organization_url_name: null
 slide: false

@@ -1,9 +1,9 @@
 ---
-title: '[Swift] struct は weak self は必要ない（できない）件'
+title: "[Swift] struct は weak self は必要ない（できない）件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 4fb1a3c4afe6af7bb652
 organization_url_name: null
 slide: false

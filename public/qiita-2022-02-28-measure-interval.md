@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] measureInterval(using:) の出力を Stride 型から秒単位に変換する'
+title: "[Swift] [Combine] measureInterval(using:) の出力を Stride 型から秒単位に変換する"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 177306189ad7c38796c0
 organization_url_name: null
 slide: false

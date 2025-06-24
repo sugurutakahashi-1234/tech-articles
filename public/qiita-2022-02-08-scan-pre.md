@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] didSetのoldValueに相当する値をCombineのストリームで扱う方法'
+title: "[Swift] [Combine] didSetのoldValueに相当する値をCombineのストリームで扱う方法"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 104c602f64fab01e93a8
 organization_url_name: null
 slide: false

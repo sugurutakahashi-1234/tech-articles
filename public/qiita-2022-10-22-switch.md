@@ -1,9 +1,9 @@
 ---
-title: '[Swift] enum の switch-case 文で where を使うと Xcode の補完機能の恩恵を得られない件'
+title: "[Swift] enum の switch-case 文で where を使うと Xcode の補完機能の恩恵を得られない件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 13406a7f7e86135c47a3
 organization_url_name: null
 slide: false

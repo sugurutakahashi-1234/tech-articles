@@ -1,9 +1,9 @@
 ---
-title: '[Swift] weak self しないと強参照で解放できないサンプルコード'
+title: "[Swift] weak self しないと強参照で解放できないサンプルコード"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 3f0fe9ae95463e8e5250
 organization_url_name: null
 slide: false

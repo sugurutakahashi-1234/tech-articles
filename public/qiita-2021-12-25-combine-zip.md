@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] zipの完了条件あれこれ'
+title: "[Swift] [Combine] zipの完了条件あれこれ"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: a0983d9764d92e4e6ebc
 organization_url_name: null
 slide: false

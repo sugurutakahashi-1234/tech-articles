@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 安全に割り算する Double の extension'
+title: "[Swift] 安全に割り算する Double の extension"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 204a57e01edd572ca919
 organization_url_name: null
 slide: false

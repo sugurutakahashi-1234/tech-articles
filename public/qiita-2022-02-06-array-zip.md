@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 配列をペアに変換して処理する方法（zip, dropFirst 活用）'
+title: "[Swift] 配列をペアに変換して処理する方法（zip, dropFirst 活用）"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 2c763871c5317db51ac1
 organization_url_name: null
 slide: false

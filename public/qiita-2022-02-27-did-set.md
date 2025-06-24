@@ -1,9 +1,9 @@
 ---
-title: '[Swift] Class と Struct の変数の didSet 挙動の違いについて'
+title: "[Swift] Class と Struct の変数の didSet 挙動の違いについて"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 42f2a23b9e787434dd5d
 organization_url_name: null
 slide: false

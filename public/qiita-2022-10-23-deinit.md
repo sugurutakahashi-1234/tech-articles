@@ -1,9 +1,9 @@
 ---
-title: '[Swift] struct は deinit を記述できない件'
+title: "[Swift] struct は deinit を記述できない件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 999f8e3b80205c8aa18b
 organization_url_name: null
 slide: false

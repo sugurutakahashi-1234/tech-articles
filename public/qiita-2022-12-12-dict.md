@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 辞書型あれこれ'
+title: "[Swift] 辞書型あれこれ"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: d6efbaccdba760d90298
 organization_url_name: null
 slide: false

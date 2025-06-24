@@ -1,9 +1,9 @@
 ---
-title: '[Swift] イニシャライズで失敗する場合は nil を返すのではなく throw しよう'
+title: "[Swift] イニシャライズで失敗する場合は nil を返すのではなく throw しよう"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: d27d28c1d6374849fd48
 organization_url_name: null
 slide: false

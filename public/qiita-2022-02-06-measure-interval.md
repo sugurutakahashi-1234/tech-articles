@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] measureInterval(using:)を使って出力の間隔を取得する'
+title: "[Swift] [Combine] measureInterval(using:)を使って出力の間隔を取得する"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: c9f6ed9259d73c3bbf9f
 organization_url_name: null
 slide: false

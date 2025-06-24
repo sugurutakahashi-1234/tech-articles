@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] ストリームに reduce() 処理の途中経過を流したい場合 -> scan() を使おう！'
+title: "[Swift] [Combine] ストリームに reduce() 処理の途中経過を流したい場合 -> scan() を使おう！"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 914f1f67691b1841a909
 organization_url_name: null
 slide: false

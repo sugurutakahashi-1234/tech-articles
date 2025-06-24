@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 配列を比較して差分のあるindexの配列を返却する便利関数を作った件'
+title: "[Swift] 配列を比較して差分のあるindexの配列を返却する便利関数を作った件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 475610a1e48d8a80559b
 organization_url_name: null
 slide: false

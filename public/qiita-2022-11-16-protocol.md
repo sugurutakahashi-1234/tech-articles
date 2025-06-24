@@ -1,9 +1,9 @@
 ---
-title: '[Swift] protocol の関数の引数にデフォルト値を設定する方法'
+title: "[Swift] protocol の関数の引数にデフォルト値を設定する方法"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 96e3a916403b750b95e9
 organization_url_name: null
 slide: false

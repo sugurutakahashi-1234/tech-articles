@@ -1,9 +1,9 @@
 ---
-title: '[Swift] タプルのアクセス方法あれこれ'
+title: "[Swift] タプルのアクセス方法あれこれ"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 85ee2dc668a6ff1ec383
 organization_url_name: null
 slide: false

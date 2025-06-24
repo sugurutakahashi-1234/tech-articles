@@ -1,9 +1,9 @@
 ---
-title: '[Swift] nil の意味を明確にする方法'
+title: "[Swift] nil の意味を明確にする方法"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 0d6697cc4716d9dbde9b
 organization_url_name: null
 slide: false

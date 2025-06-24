@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] 複数条件を監視するなら combineLatest, filter, first の組み合わせがおすすめ'
+title: "[Swift] [Combine] 複数条件を監視するなら combineLatest, filter, first の組み合わせがおすすめ"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: f18f31ea26cf6358ef7f
 organization_url_name: null
 slide: false

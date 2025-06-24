@@ -1,9 +1,9 @@
 ---
-title: '[Swift] JSONSerialization を使って辞書型に変換すると数値や Bool 値の型が勝手に変更されてしまう件'
+title: "[Swift] JSONSerialization を使って辞書型に変換すると数値や Bool 値の型が勝手に変更されてしまう件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: ba2af8d7eb5363360404
 organization_url_name: null
 slide: false

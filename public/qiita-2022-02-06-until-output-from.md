@@ -1,10 +1,10 @@
 ---
-title: '[Swift] [Combine] prefix(untilOutputFrom:)で他のPublisherの出力を条件に完了させる'
+title: "[Swift] [Combine] prefix(untilOutputFrom:)で他のPublisherの出力を条件に完了させる"
 tags:
-  - Swift
-  - Combine
+  - "Swift"
+  - "Combine"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 4a9c10ae0121b750153b
 organization_url_name: null
 slide: false

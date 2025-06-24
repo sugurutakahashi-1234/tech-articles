@@ -1,9 +1,9 @@
 ---
-title: '[Swift] どうして weak var delegate とするのか？'
+title: "[Swift] どうして weak var delegate とするのか？"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 047a19ef6db49c125016
 organization_url_name: null
 slide: false

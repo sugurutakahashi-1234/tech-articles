@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] 安易に share() した Publisher を subscribe すると出力を逃してしまう件'
+title: "[Swift] [Combine] 安易に share() した Publisher を subscribe すると出力を逃してしまう件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 18fd477b1f9000ecbe31
 organization_url_name: null
 slide: false

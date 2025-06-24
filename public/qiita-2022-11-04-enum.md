@@ -1,9 +1,9 @@
 ---
-title: '[Swift] 連想値を持つ enum に Equatable を適応させた場合の挙動'
+title: "[Swift] 連想値を持つ enum に Equatable を適応させた場合の挙動"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 71969cd8252a47dc132d
 organization_url_name: null
 slide: false

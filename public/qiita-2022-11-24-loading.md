@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] ローディング状態を表す enum に値を持たせない方法'
+title: "[Swift] [Combine] ローディング状態を表す enum に値を持たせない方法"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 1766f4b0e02f14c2ef91
 organization_url_name: null
 slide: false

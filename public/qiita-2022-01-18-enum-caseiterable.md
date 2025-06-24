@@ -1,10 +1,10 @@
 ---
-title: '[Swift] 値付き enum は CaseIterable をつけても allCases を自身で定義しなければならない件'
+title: "[Swift] 値付き enum は CaseIterable をつけても allCases を自身で定義しなければならない件"
 tags:
-  - Swift
-  - CaseIterable
+  - "Swift"
+  - "CaseIterable"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: e601331207aa50843c85
 organization_url_name: null
 slide: false

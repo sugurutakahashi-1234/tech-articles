@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPublisher であるときのインターフェースの検討'
+title: "[Swift] [Combine] 配列を引数にとる関数の戻り値が AnyPublisher であるときのインターフェースの検討"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 5abbcaddfb9b76e2374c
 organization_url_name: null
 slide: false

@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] combineLatest() -> map() は combineLatest() {} で書き直せる'
+title: "[Swift] [Combine] combineLatest() -> map() は combineLatest() {} で書き直せる"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 5b19fd94e53181e07fc5
 organization_url_name: null
 slide: false

@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] ストリームはcancel()やsend(completion:)を受け付けた時点で出力を受け付けない'
+title: "[Swift] [Combine] ストリームはcancel()やsend(completion:)を受け付けた時点で出力を受け付けない"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 2cdead5ec940c484f16a
 organization_url_name: null
 slide: false

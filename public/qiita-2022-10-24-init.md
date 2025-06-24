@@ -1,9 +1,9 @@
 ---
-title: '[Swift] struct 生成時にイニシャライザのデフォルト引数と変数の初期値のどちらが優先されるか？'
+title: "[Swift] struct 生成時にイニシャライザのデフォルト引数と変数の初期値のどちらが優先されるか？"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 4da493ce4b91eab3e0ac
 organization_url_name: null
 slide: false

@@ -1,9 +1,9 @@
 ---
-title: '[Swift] associatedtype の実装例'
+title: "[Swift] associatedtype の実装例"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 5b350b219218b19ebe9a
 organization_url_name: null
 slide: false

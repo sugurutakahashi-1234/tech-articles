@@ -1,9 +1,9 @@
 ---
-title: '[git] gitignore.io から .gitignore ファイルを npx コマンドで生成する方法'
+title: "[git] gitignore.io から .gitignore ファイルを npx コマンドで生成する方法"
 tags:
-  - gitignore
+  - "gitignore"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: 776ddbae37accb844243
 organization_url_name: null
 slide: false

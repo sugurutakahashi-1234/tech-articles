@@ -1,9 +1,9 @@
 ---
-title: '[Swift] rawValue を持つ enum には自動的にイニシャライザが定義される'
+title: "[Swift] rawValue を持つ enum には自動的にイニシャライザが定義される"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: 52a09017bdd928eae6c5
 organization_url_name: null
 slide: false

@@ -1,9 +1,9 @@
 ---
-title: '[Swift] Computed Property でも例外を throw できる件'
+title: "[Swift] Computed Property でも例外を throw できる件"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:30+09:00'
+updated_at: ''
 id: b497f4b73c60709be0e5
 organization_url_name: null
 slide: false

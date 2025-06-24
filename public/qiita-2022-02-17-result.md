@@ -1,9 +1,9 @@
 ---
-title: '[Swift] [Combine] エラーがあっても止まらないストリームを作りたい！'
+title: "[Swift] [Combine] エラーがあっても止まらないストリームを作りたい！"
 tags:
-  - Swift
+  - "Swift"
 private: false
-updated_at: '2023-11-15T20:50:31+09:00'
+updated_at: ''
 id: f312f9fca183662293b1
 organization_url_name: null
 slide: false
