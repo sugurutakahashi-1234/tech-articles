@@ -1,5 +1,5 @@
 ---
-title: "React Router v7 vs TanStack Router x File-Based vs Code-Based Routing 4パターン実装比較"
+title: "React Router v7 / TanStack Router x File-Based / Code-Based 4パターン実装比較"
 tags:
   - "React"
   - "React
@@ -15,7 +15,7 @@ slide: false
 ignorePublish: false
 ---
 
-# React Router v7 vs TanStack Router x File-Based vs Code-Based Routing 4パターン実装比較
+# React Router v7 / TanStack Router x File-Based / Code-Based 4パターン実装比較
 
 モダンなReactアプリケーションにおけるルーティングの選択は、プロジェクトの成功を左右する重要な決定の一つです。本記事では、React Router v7とTanStack Routerを、File-Based RoutingとCode-Based Routingの両観点から実装・比較した結果をご紹介します。
 
