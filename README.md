@@ -22,8 +22,26 @@ Zenn のアカウントと紐付けられているこのリポジトリの [arti
 npx zenn new:article
 ```
 
+### 新しい本の作成
+
+```shell
+npx zenn new:book --slug book_slug_name
+```
+
 ### プレビュー
 
 ```shell
 npx zenn preview
 ```
+
+## ディレクトリ構造
+
+```
+.
+├── articles/ # 記事を格納するディレクトリ
+├── books/    # 本を格納するディレクトリ
+│   └── sample_book_example/ # サンプルブック
+│       ├── config.yaml # 本の設定ファイル
+│       ├── example1.md # 第1章
+│       └── example2.md # 第2章
+└── public/   # 画像などの静的ファイルを格納
