@@ -26,20 +26,31 @@ npx zenn preview
 
 これらのコマンドを使用して、コンテンツを作成・管理できます。
 
-## 静的ファイルの配置
+## 画像の使用方法
 
-本や記事で使用する画像などの静的ファイルは、`public`ディレクトリに配置します。
+Zennで画像を使用する場合は、以下の方法があります：
 
-![Zenn Booksロゴ](/zenn-books-logo.svg)
+### Zennエディタでの画像アップロード
 
-### ファイルパスの指定方法
+1. Zennのエディタを開く
+2. 画像をドラッグ&ドロップするか、画像アップロードボタンをクリック
+3. 自動的に以下のようなMarkdownが挿入されます：
 
-- 絶対パス: `/ファイル名` （推奨）
-- 相対パスは使用しません
+```markdown
+![](https://storage.googleapis.com/zenn-user-upload/xxxxx.png)
+```
 
-### サポートされるファイル形式
+### 画像の書式
 
-- 画像: `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`
-- その他の静的ファイル
+```markdown
+![代替テキスト](画像URL)
+*キャプション*
+```
+
+画像のサイズ指定も可能です：
+
+```markdown
+![](画像URL =250x)
+```
 
 詳細は[Zennの公式ドキュメント](https://zenn.dev/zenn/articles/markdown-guide)を参照してください。

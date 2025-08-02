@@ -16,8 +16,23 @@ Zennのbooks機能を使用することで、複数の章からなる本を作�
 
 ## 画像の使用例
 
-Zennでは、`public`ディレクトリに配置した静的ファイルを参照できます。
+Zennで画像を使用する方法：
 
-![サンプル画像](/sample-image.svg)
+### 1. Zennの画像アップロード機能を使う（推奨）
 
-このように、`/sample-image.svg`のパスで画像を参照できます。
+Zennのエディタで画像をドラッグ&ドロップするか、画像アップロードボタンを使用すると、自動的にZennのサーバーにアップロードされ、以下のような形式のURLが生成されます：
+
+```markdown
+![画像の説明](https://storage.googleapis.com/zenn-user-upload/xxxxx.png)
+```
+
+### 2. 外部の画像URLを使用
+
+```markdown
+![画像の説明](https://example.com/image.png)
+```
+
+### 注意事項
+
+- GitHubリポジトリ内の`public`ディレクトリの画像は、Zennでは直接表示できません
+- 画像を表示したい場合は、Zennの画像アップロード機能を使用するか、外部の画像ホスティングサービスを利用してください

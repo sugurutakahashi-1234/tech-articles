@@ -39,9 +39,9 @@ npx zenn preview
 ```
 .
 ├── articles/ # 記事を格納するディレクトリ
-├── books/    # 本を格納するディレクトリ
-│   └── sample_book_example/ # サンプルブック
-│       ├── config.yaml # 本の設定ファイル
-│       ├── example1.md # 第1章
-│       └── example2.md # 第2章
-└── public/   # 画像などの静的ファイルを格納
+└── books/    # 本を格納するディレクトリ
+    └── sample_book_example/ # サンプルブック
+        ├── config.yaml # 本の設定ファイル
+        ├── cover.png   # カバー画像
+        ├── example1.md # 第1章
+        └── example2.md # 第2章
