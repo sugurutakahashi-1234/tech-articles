@@ -59,10 +59,9 @@ published: false
 
 フリーランスになってから身につけたスキルを挙げると：
 
-- SwiftUI、Combineの習得
-- Swift Package Managerによるマルチモジュール設計の経験
-- Swift Concurrency、Xcode Cloud、Swift 6対応を先行して学習
+- SwiftUI、Combine、Swift Concurrency、マルチモジュール設計など、iOS開発の新しい技術をキャッチアップ
 - SwiftUI経験を武器にiOSリードエンジニアのポジションを獲得
+- SwiftからReact Nativeへの転向
 
 元記事が言う「挑戦させてもらいづらい」という観点では、確かにフリーランスは不利です。会社が投資対象として扱ってくれるわけではありません。
 
