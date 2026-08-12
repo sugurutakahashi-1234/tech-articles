@@ -64,6 +64,10 @@ Satori は SVG しか出力しないため、OGP に必要な PNG 化は sharp �
 - `src/lib/og-image.ts`: Satori でレイアウトを組み sharp で PNG 化する共通ロジック
 - `src/pages/og/blog/[slug].png.ts` / `src/pages/og/news/[slug].png.ts`: コレクションを列挙して共通ロジックを呼ぶ薄いエンドポイント
 
+ビルド時の流れを図にすると次のとおりです。
+
+![OGP 画像のビルドパイプライン。ブログ記事 Markdown を Zod スキーマで検証し、getStaticPaths で全記事を列挙、Satori で SVG を組み立て sharp で PNG にラスタライズして、静的ファイルとして Cloudflare Pages から配信する](https://tech.zenshin-inc.co.jp/assets/blogs/astro-og-image-generation/og-build-pipeline.png)
+
 ### 動的ルートで全記事の OGP を生成
 
 Astro の `getStaticPaths` でコレクションを列挙し、記事ごとに `/og/blog/<slug>.png` を生成します。ファイル名を `[slug].png.ts` のように拡張子付きで書くと、そのまま出力の拡張子になります。
