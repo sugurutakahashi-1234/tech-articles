@@ -1,5 +1,5 @@
 ---
-title: "会社ホームページを Next.js ではなく Astro で作った理由"
+title: "ホームページをAstroで作った話"
 emoji: "🚀"
 type: "tech"
 topics: ["astro", "nextjs", "cloudflare", "tailwindcss", "frontend"]

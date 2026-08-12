@@ -1,5 +1,5 @@
 ---
-title: "Astro 製ブログの OGP 画像を Satori + sharp でビルド時に自動生成する"
+title: "技術ブログのOGP画像を自動生成した話"
 emoji: "🖼️"
 type: "tech"
 topics: ["astro", "satori", "sharp", "ogp", "typescript"]
