@@ -5,7 +5,8 @@
     "bun": ">=1.0.0"
   },
   "scripts": {
-    "preinstall": "npx only-allow bun"
+    "preinstall": "npx only-allow bun",
+    "preview": "zenn preview"
   },
   "devDependencies": {
     "zenn-cli": "^0.4.1"
