@@ -7,7 +7,7 @@ published: true
 ---
 
 :::message
-この記事は [ZENSHIN 技術ブログ](https://tech.zenshin-inc.co.jp/) で 2026-04-17 に公開した記事の転載です。元記事はこちら 👇
+この記事は [ZENSHIN 技術ブログ](https://tech.zenshin-inc.co.jp/) で 2026-04-17 に公開した記事の転載です。元記事はこちら:
 
 https://tech.zenshin-inc.co.jp/blog/astro-og-image-generation/
 :::
