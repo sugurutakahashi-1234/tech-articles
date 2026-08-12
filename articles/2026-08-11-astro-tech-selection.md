@@ -4,6 +4,7 @@ emoji: "🚀"
 type: "tech"
 topics: ["astro", "nextjs", "cloudflare", "tailwindcss", "frontend"]
 published: true
+publication_name: zenshin
 ---
 
 :::message

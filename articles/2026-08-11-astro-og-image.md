@@ -4,6 +4,7 @@ emoji: "🖼️"
 type: "tech"
 topics: ["astro", "satori", "sharp", "ogp", "typescript"]
 published: true
+publication_name: zenshin
 ---
 
 :::message
