@@ -5,7 +5,7 @@
     "": {
       "name": "zenn",
       "devDependencies": {
-        "zenn-cli": "^0.4.1",
+        "zenn-cli": "^0.5.2",
       },
     },
   },
@@ -32,6 +32,6 @@
 
     "wsl-utils": ["wsl-utils@0.1.0", "", { "dependencies": { "is-wsl": "^3.1.0" } }, "sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw=="],
 
-    "zenn-cli": ["zenn-cli@0.4.1", "", { "dependencies": { "open": "^10.2.0", "package-manager-detector": "^1.6.0" }, "bin": { "zenn": "dist/server/zenn.js" } }, "sha512-zK6/VxIcue72msrIvJXGbWOqLvQ2gbzpIFli7gmdLj4PxU2ZL9l8Ye6PUPsvjMI/ZHAFgiWdxOVEEcjphBdbZg=="],
+    "zenn-cli": ["zenn-cli@0.5.2", "", { "dependencies": { "open": "^10.2.0", "package-manager-detector": "^1.6.0" }, "bin": { "zenn": "dist/server/zenn.js" } }, "sha512-HwZDjkZ8b2BExSwJKE4ERqm3e6+W9J8yNGHbOdKAmUWz4+Z9akGTijFFdK2QsPHp3E1acaGmKvE1jE5MZkLO0A=="],
   }
 }
