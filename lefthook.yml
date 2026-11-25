@@ -1,0 +1,55 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+# pre-push:
+#   jobs:
+#     - name: packages audit
+#       tags:
+#         - frontend
+#         - security
+#       run: yarn audit
+#
+#     - name: gems audit
+#       tags:
+#         - backend
+#         - security
+#       run: bundle audit
+#
+# pre-commit:
+#   parallel: true
+#   jobs:
+#     - run: yarn eslint {staged_files}
+#       glob: "*.{js,ts,jsx,tsx}"
+#
+#     - name: rubocop
+#       glob: "*.rb"
+#       exclude:
+#         - config/application.rb
+#         - config/routes.rb
+#       run: bundle exec rubocop --force-exclusion -- {all_files}
+#
+#     - name: govet
+#       files: git ls-files -m
+#       glob: "*.go"
+#       run: go vet -- {files}
+#
+#     - script: "hello.js"
+#       runner: node
+#
+#     - script: "hello.go"
+#       runner: go run
+
+# コミットメッセージ検証（正本: ルール集 harness-ai-rules の rules/language-and-commits.md）
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: bunx commitlint --edit {1}
+
+pre-commit:
+  jobs:
+    # 秘密の混入を commit の前に止める。個人のアカウントの非公開リポジトリでは GitHub の push protection が使えず、ここが唯一の守り。
+    # --redact を外すと、見つけた値そのものが端末と記録に残る
+    - name: gitleaks
+      run: gitleaks git --staged --redact --no-banner
